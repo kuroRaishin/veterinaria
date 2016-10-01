@@ -1,0 +1,87 @@
+*{
+	margin:0px;
+	padding:0px;
+	font-family: helvetica Neue;
+	font-weight: lighter;
+}
+html,body{
+	background-color: #e2e2e2;
+}
+section#formulario{
+	position: absolute;
+	top:50%;
+	left: 45%;
+	margin-left: -200px;
+	margin-top: -300px;
+	width:500px;
+	min-height: 100px;
+	background-color: white;
+	overflow: hidden;
+	border-radius: 5px;
+}
+p#titulo{
+	font-size: 1.6em;
+	text-align: center;
+	margin-top: 20px;
+}
+input[type="text"], input[type="password"], input[type="mail"]{
+	width: 450px;
+	height: 35px;
+	margin-left: 20px;
+	margin-top:10px;
+	padding-left: 10px;
+	font-size: 1.1em;
+	outline: none;
+	border:0px;
+	background-color: #dcdcdc;
+	border-radius: 5px;
+}
+input[type="submit"]{
+	margin:20px;
+	margin-bottom: 20px;
+	width:460px;
+	height: 40px;
+	outline: none;
+	border:0px;
+	background-color: #75b6dc;
+	color: white;
+	font-size: 1.2em;
+	border-radius: 5px;
+	-webkit-box-shadow:0px 5px 0px #659dbf;
+}
+.botones{
+	margin:20px;
+	margin-bottom: 20px;
+	width:460px;
+	height: 40px;
+	outline: none;
+	border:0px;
+	background-color: #75b6dc;
+	color: black;
+	font-weight:900;
+	border-radius: 5px;
+	-webkit-box-shadow:0px 5px 0px #659dbf;
+	text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+	align-items: flex-start;
+    text-align: center;
+	box-sizing: border-box;
+	-webkit-appearance: push-button;
+    -webkit-user-select: none;
+	-webkit-rtl-ordering: logical;
+	letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+	text-decoration: none;
+}
+a:hover{
+	background-color: #FF8000;
+	-webkit-box-shadow:0px 5px 0px #FF8000;
+}

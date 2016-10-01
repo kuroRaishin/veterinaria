@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.14
+-- version 4.5.5.1
 -- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 01-10-2016 a las 19:07:28
--- Versión del servidor: 5.6.26
--- Versión de PHP: 5.6.12
+-- Servidor: localhost
+-- Tiempo de generación: 01-10-2016 a las 20:01:16
+-- Versión del servidor: 5.7.11
+-- Versión de PHP: 5.6.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `administrador`
 --
 
-CREATE TABLE IF NOT EXISTS `administrador` (
+CREATE TABLE `administrador` (
   `id_admin` int(11) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `apellido` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `administrador` (
   `telefono` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   `fecha_creacion` datetime DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `administrador`
@@ -52,7 +52,7 @@ INSERT INTO `administrador` (`id_admin`, `nombre`, `apellido`, `documento`, `ema
 -- Estructura de tabla para la tabla `cita`
 --
 
-CREATE TABLE IF NOT EXISTS `cita` (
+CREATE TABLE `cita` (
   `id_cita` int(11) NOT NULL,
   `asunto` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `nota` text COLLATE utf8_spanish2_ci,
@@ -72,11 +72,11 @@ CREATE TABLE IF NOT EXISTS `cita` (
 -- Estructura de tabla para la tabla `estatus_cita`
 --
 
-CREATE TABLE IF NOT EXISTS `estatus_cita` (
+CREATE TABLE `estatus_cita` (
   `id_estatus` int(11) NOT NULL,
   `id_mascota` int(11) DEFAULT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `estatus_cita`
@@ -94,7 +94,7 @@ INSERT INTO `estatus_cita` (`id_estatus`, `id_mascota`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `mascota`
 --
 
-CREATE TABLE IF NOT EXISTS `mascota` (
+CREATE TABLE `mascota` (
   `id_mascota` int(11) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `genero` varchar(1) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `mascota` (
 -- Estructura de tabla para la tabla `propietario`
 --
 
-CREATE TABLE IF NOT EXISTS `propietario` (
+CREATE TABLE `propietario` (
   `id_propietario` int(11) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `apellido` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `propietario` (
   `telefono` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `fecha_creacion` datetime DEFAULT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `propietario`
@@ -139,10 +139,10 @@ INSERT INTO `propietario` (`id_propietario`, `nombre`, `apellido`, `documento`, 
 -- Estructura de tabla para la tabla `servicios`
 --
 
-CREATE TABLE IF NOT EXISTS `servicios` (
+CREATE TABLE `servicios` (
   `id_servicios` int(11) NOT NULL,
   `nombre` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `servicios`
@@ -170,14 +170,14 @@ INSERT INTO `servicios` (`id_servicios`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `usuario`
 --
 
-CREATE TABLE IF NOT EXISTS `usuario` (
+CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `documento` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `password` varchar(60) COLLATE utf8_spanish2_ci NOT NULL,
   `rol` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -195,7 +195,7 @@ INSERT INTO `usuario` (`id_usuario`, `documento`, `email`, `password`, `rol`, `a
 -- Estructura de tabla para la tabla `veterinaria`
 --
 
-CREATE TABLE IF NOT EXISTS `veterinaria` (
+CREATE TABLE `veterinaria` (
   `id_veterinaria` int(11) NOT NULL,
   `nombre_empresa` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `documento` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -206,7 +206,9 @@ CREATE TABLE IF NOT EXISTS `veterinaria` (
   `telefono` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   `fecha_creacion` datetime DEFAULT NULL,
-  `id_servicios` int(11) DEFAULT NULL
+  `id_servicios` int(11) DEFAULT NULL,
+  `latVet` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `lonVet` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -269,7 +271,7 @@ ALTER TABLE `veterinaria`
 -- AUTO_INCREMENT de la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `cita`
 --
@@ -279,7 +281,7 @@ ALTER TABLE `cita`
 -- AUTO_INCREMENT de la tabla `estatus_cita`
 --
 ALTER TABLE `estatus_cita`
-  MODIFY `id_estatus` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id_estatus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `mascota`
 --
@@ -289,17 +291,17 @@ ALTER TABLE `mascota`
 -- AUTO_INCREMENT de la tabla `propietario`
 --
 ALTER TABLE `propietario`
-  MODIFY `id_propietario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id_propietario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `id_servicios` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+  MODIFY `id_servicios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `veterinaria`
 --
