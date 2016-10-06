@@ -13,23 +13,11 @@ class Usuario extends Conexion
 	{
 		$this->model = parent::__construct();
 	}
-	public function getNombre_suario() {
-		return $this->nombre_usuario;
+	public function getDocumento() {
+		return $this->documento;
 	}
-	public function setNombre_usuario($nombre_usuario){
-		$this->nombre_usuario = $nombre_usuario;
-	}
-	public function getNombre() {
-		return $this->nombre;
-	}
-	public function setNombre($nombre){
-		$this->nombre = $nombre;
-	}
-	public function getApellido() {
-		return $this->apellido;
-	}
-	public function setApellido($apellido){
-		$this->apellido = $apellido;
+	public function setDocumento($documento){
+		$this->documento = $documento;
 	}
 	public function getEmail() {
 		return $this->email;
@@ -56,7 +44,7 @@ class Usuario extends Conexion
 		$this->rol = $rol;
 	}
 	public function logeo(){
-		$query = "SELECT * FROM usuario WHERE email='".$this->email."'AND password='".$this->password."'";
+		$query = "SELECT * FROM usuario WHERE email='".$this->email."'AND password='".$this->password."' AND activo ='1' ";
 		$stmt = $this->model->prepare($query); 
 		$stmt->execute();
 		return $stmt->fetch(PDO::FETCH_ASSOC);

@@ -138,11 +138,12 @@ class Mascota extends Conexion
 		$stmt->execute();
 		return $stmt->fetchAll(PDO::FETCH_OBJ);
 	}
-	public function listarId($documento){
-		$query="SELECT * FROM mascota WHERE documento_dueño='".$documento."'";
+
+	public function listarId(){
+		$query="SELECT * FROM mascota WHERE documento='".$this->documento."'";
 		$stmt=$this->model->prepare($query);
 		$stmt->execute();
-		return $stmt->fetch(PDO::FETCH_ASSOC);
+		return $stmt->fetchAll(PDO::FETCH_OBJ);
 	}
 }
  ?>

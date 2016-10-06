@@ -2,8 +2,8 @@
 require_once 'model/conexion.php';
 class Administrador extends Conexion{
 
-	private $nombre_usuario,$nombre,$apellido,$email,$password,$activo,$fecha_creacion,$documento_usuario,$rol;
-	private $model;
+	private $nombre,$apellido,$documento,$email,$direccion,$telefono,$activo,$fecha_creacion;
+	private $model,$password,$rol;
 
 
 	public function __construct(){
@@ -11,79 +11,92 @@ class Administrador extends Conexion{
 		$this->model=parent::__construct();
 	}
 
-	public function getUsuario(){
-		return $this->user;
-	}
-
-	public function setUsuario($usuario){
-		$this->user=$usuario;
-	}
-	
 	public function getDocumento(){
 		return $this->documento;
 	}
-
-	public function setDocumento($documento_usuario){
-		$this->documento_usuario=$documento_usuario;
+	public function setDocumento($documento){
+		$this->documento=$documento;
 	}
 	
-	public function getNombre(){
-		return $this->nombre;
-	}
-
-	public function setNombre($nombre){
-		$this->nombre=$nombre;
-	}
-	public function getApellido(){
-		return $this->apellido;
-	}
-
-	public function setApellido($apellido){
-		$this->apellido=$apellido;
-	}
 	public function getPassword(){
 		return $this->password;
 	}
-
 	public function setPassword($password){
 		$this->password=$password;
 	}
+
 	public function getRol(){
 		return $this->password;
 	}
-
 	public function setRol($rol){
 		$this->rol=$rol;
 	}
+
 	public function getEmail(){
 		return $this->email;
 	}
-
 	public function setEmail($email){
 		$this->email=$email;
 	}
 	
-	
+	/**/
+	public function getNombre() {
+		return $this->nombre;
+	}
+	public function setNombre($nombre) {
+		$this->nombre=$nombre;
+	}
+	public function getApellido() {
+		return $this->apellido;
+	}
+	public function setApellido($apellido) {
+		$this->apellido=$apellido;
+	}
+	public function getDireccion() {
+		return $this->direccion;
+	}
+	public function setDireccion($direccion) {
+		$this->direccion=$direccion;
+	}
+	public function getTelefono() {
+		return $this->telefono;
+	}
+	public function setTelefono($telefono) {
+		$this->telefono=$telefono;
+	}
+	public function getActivo() {
+		return $this->nombre;
+	}
+	public function setActivo($activo) {
+		$this->activo=$activo;
+	}
+	public function getFecha_creacion() {
+		return $this->fecha_creacion;/*aaaa-mm-dd 00:00:00*/
+	}
+	/*public function setFecha_creacion($fecha_creacion) {
+		$this->fecha_creacion=$fecha_creacion;
+	}*/
 
 
 	public function insertar(){
 
 		try {
-
-			$query="INSERT INTO usuario(nombre,apellido,documento,rol,email) VALUES ('".$this->nombre."','".$this->apellido."','".$this->documento."','".$this->rol."','".$this->email."')";
+			$query="INSERT INTO administrador(nombre,apellido,documento,email,direccion,telefono) VALUES ('".$this->nombre."','".$this->apellido."','".$this->documento."','".$this->email."','".$this->direccion."','".$this->telefono."')";
 
 			$stmt=$this->model->prepare($query);
 			$stmt->execute();
 
-			/*$query2="INSERT INTO usuario(usuario,documento,password) VALUES ('".$this->user."','".$this->documento."','".$this->password."')";
+
+			$query2="INSERT INTO usuario(documento,email,password,rol) VALUES ('".$this->documento."','".$this->email."','".$this->password."','".$this->rol."')";
 
 			$stmt=$this->model->prepare($query2);
-			$stmt->execute();*/
+			$stmt->execute();
+
 			return true;
 			
 		} catch (PDOException $e) {
 
-			/*return false*/ die($e->getMessage());
+			die($e->getMessage());
 			
 		}		
 	}
@@ -92,13 +105,15 @@ class Administrador extends Conexion{
 
 		try {
 
-			$query="UPDATE usuario U INNER JOIN usuario I ON U.documento=I.documento SET U.documento='".$this->documento."', U.password='".$this->password."', I.nombre='".$this->nombre."', I.apellido='".$this->apellido."', I.rol='".$this->rol."', I.documento='".$this->documento."', I.email='".$this->email."' WHERE U.documento='".$this->documento."'";
-			// $query="UPDATE usuarios U INNER JOIN usuario I ON U.documento=I.documento SET U.documento='".$this->documento."', U.password='".$this->password."', I.nombre='".$this->nombre."', I.apellido='".$this->apellido."', I.rol='".$this->rol."', I.documento='".$this->documento."', I.email='".$this->email."' WHERE U.usuario='".$this->user."'";
+			$query="UPDATE administrador A INNER JOIN usuario U ON A.documento=U.documento SET U.documento='".$this->documento."', U.password='".$this->password."', A.nombre='".$this->nombre."', A.apellido='".$this->apellido."', U.rol='".$this->rol."', A.documento='".$this->documento."', A.email='".$this->email."', U.email='".$this->email."', A.telefono='".$this->telefono."', A.direccion='".$this->direccion."' WHERE U.documento='".$this->documento."'";
 
 			$stmt=$this->model->prepare($query);
 			$stmt->execute();
 
-			return true;
+			return "<script type='text/javascript'>
+						alert('El registro se realizó correctamente');
+						window.location='?controller=administrador&accion=index';
+						</script>";
 			
 		} catch (PDOException $e) {
 
@@ -108,17 +123,18 @@ class Administrador extends Conexion{
 	}
 
 
-	public function eliminar(){//Elimina registros de dos tablas con el usuario, email o documento
+	public function eliminar(){//bloquea registros de dos tablas con el usuario, email o documento
 
 		try {
 
-			$query="DELETE U.*,I.* FROM usuario U INNER JOIN usuario I ON U.documento=I.documento WHERE U.documento='".$this->documento."'";
-
+			$query="UPDATE administrador SET activo=0 WHERE documento='".$this->documento."'";
 			$stmt=$this->model->prepare($query);
 			$stmt->execute();
-
-			return true;
-			
+			$query2="UPDATE usuario SET activo=0 WHERE documento='".$this->documento."'";
+			$stmt=$this->model->prepare($query2);
+			$stmt->execute();
+			return true ;
+					
 		} catch (PDOException $e) {
 
 			return false;
@@ -128,14 +144,14 @@ class Administrador extends Conexion{
 
 	public function listar() {
 
-		$query="SELECT * FROM usuario WHERE rol='administrador'";
+		$query="SELECT * FROM administrador WHERE activo='1'";
 		$stmt=$this->model->prepare($query);
 		$stmt->execute();
 		return $stmt->fetchAll(PDO::FETCH_OBJ);
 	}
 
-	public function listarId($documento){
-		$query="SELECT * FROM usuario WHERE documento='".$documento_usuario."'";
+	public function listarId(){
+		$query="SELECT * FROM administrador WHERE documento='".$this->documento."'";
 		$stmt=$this->model->prepare($query);
 		$stmt->execute();
 		return $stmt->fetch(PDO::FETCH_ASSOC);
