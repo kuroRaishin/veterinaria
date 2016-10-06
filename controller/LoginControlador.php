@@ -1,20 +1,40 @@
 <?php
 
 require_once'model/usuario.php';
+require_once'model/veterinaria.php';
 class LoginControlador
 {
-	private $model;
+	private $model,$vet;
 
 	public function __construct (){
 		$this->model = new Usuario();
+		$this->vet = new Veterinaria();
 	}
 
 
 	Public function Index()
 	{
-		require_once'views/header.html';
+		$veterinarias = $this->vet;
+		$stmt= $veterinarias->listaServicios();
+		require_once'views/header.php';
 		require_once'views/login/index.php';
-		require_once'views/footer.html';
+		require_once'views/footer.php';
+	}
+
+	Public function busquedas()
+	{
+		$veterinarias = $this->vet;
+		$stmt= $veterinarias->listar();
+		require_once'views/header.php';
+		require_once'views/index.php';
+		require_once'views/footer.php';
+	}
+	
+	public function listaServicios() {
+		
+		require_once 'views/header.php';
+		require_once 'views/administrador/listaVet.php';
+		require_once 'views/footer.php';
 	}
 	public function logeo()
 	{
@@ -26,20 +46,22 @@ class LoginControlador
 		session_start();
 		switch ($stmt['rol']) {
 			case 'administrador':
-				 header("location:?controller=administrador&accion=index");
-				 $_SESSION['nombre'] = $stmt['username'];
+				$_SESSION['estado'] = '1';
+				$_SESSION['nombre'] = $stmt["documento"];
+				header("location:?controller=administrador&accion=index"); 
 				break;
 			case 'veterinaria':
-					header("location:?controller=veterinaria&accion=index");
-					$_SESSION['nombre'] = $stmt['username'];
+				$_SESSION['nombre'] = $stmt["documento"];
+				header("location:?controller=veterinaria&accion=index");
 				break;
 			case 'cliente':
-					header("location:?controller=cliente&accion=index");
-					$_SESSION['nombre'] = $stmt['username'];
+				$_SESSION['nombre'] = $stmt["documento"];
+				header("location:?controller=cliente&accion=index");
+					
 				break;
 			case 'especialista':
-					header("location:?controller=especialista&accion=index");
-					$_SESSION['nombre'] = $stmt['username'];
+				$_SESSION['nombre'] = $stmt["documento"];
+				header("location:?controller=especialista&accion=index");	
 				break;
 			default:
 				 header("location:index.php");
@@ -56,8 +78,8 @@ class LoginControlador
 
 	/*Public function nuevo()
 	{
-		require_once'views/header.html';
+		require_once'views/header.php';
 		require_once'views/login/nuevo.php';
-		require_once'views/footer.html';
+		require_once'views/footer.php';
 	}*/
 }
