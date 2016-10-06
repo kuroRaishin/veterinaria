@@ -11,15 +11,13 @@
 			<table class="table table-striped table-hover">
 				<tr class="active">
 					<th><center>#</center> </th>
-					<th><center>Nombre Empresa</center> </th>
-					<th><center>Documento</center> </th>
 					<th><center>Nombre</center> </th>
 					<th><center>Apellido</center> </th>
-					<th><center>Email</center> </th>
-					<th><center>Dirrecion</center> </th>
-					<th><center>Telefono</center> </th>
-<!-- 				<th><center>Fecha creación</center> </th>
- -->				<th><center>Acción </center></th>
+					<th><center>email</center> </th>
+					<th><center>documento</center> </th>
+					<th><center>direccion</center> </th>
+					<th><center>telefono</center> </th>
+					<th><center>Acción </center></th>
 				</tr>
 				<tr class="active">
 		<?php foreach ($stmt as $key) {
@@ -28,25 +26,22 @@
 				
 				'<tr>
 				<td>'.$i.'</td>
-				<td>'.$key->nombre_empresa.'</td>
-				<td>'.$key->documento.'</td>
 				<td>'.$key->nombre.'</td>
 				<td>'.$key->apellido.'</td>
 				<td>'.$key->email.'</td>
+				<td>'.$key->documento.'</td>
 				<td>'.$key->direccion.'</td>
 				<td>'.$key->telefono.'</td>
 				<td>
-				<form method="post" action="?controller=administrador&accion=eliminar_dueno">
+				<form method="post" action="?controller=administrador&accion=eliminarAdmin">
 				<input type="hidden" name="documento" value='.$key->documento.'>
-				<button class="btn btn-info">Eliminar</button>
+				<button class="btn btn-danger">Eliminar</button>
 				</form>
 				
-				</form><form method="post" action="?controller=dueno&accion=insertar">
+				</form><form method="post" action="?controller=administrador&accion=insertarAdmin">
 				<input type="hidden" name="documento" value='.$key->documento.'>
-				<button class="btn btn-info">Editar</button>
-				</form>
-				<button class="btn btn-success">servicios</button>
-				</td>
+				<button class="btn btn-warning">Editar</button>
+				</form></td>
 				</tr>';
 			} ?>
 				</tr>

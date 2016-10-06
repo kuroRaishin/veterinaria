@@ -1,4 +1,4 @@
-<?php include_once 'views/menu.html'; error_reporting('0'); ?>
+<?php include_once 'views/administrador/menu.php'; error_reporting('0'); ?>
 
 <div class="row">
 	<div class="col-md-2">
@@ -18,7 +18,7 @@
 					<th><center>Email</center> </th>
 					<th><center>Dirrecion</center> </th>
 					<th><center>Telefono</center> </th>
-					<th><center>Fecha creación</center> </th>
+					<!-- <th><center>Fecha creación</center> </th> -->
 					<th><center>Acción </center></th>
 				</tr>
 				<tr class="active">
@@ -35,16 +35,16 @@
 				<td>'.$key->email.'</td>
 				<td>'.$key->direccion.'</td>
 				<td>'.$key->telefono.'</td>
-				<td>'.$key->fecha_creacion.'</td>
+				
 				<td>
-				<form method="post" action="?controller=administrador&accion=eliminar_dueno">
+				<form method="post" action="?controller=administrador&accion=eliminarPropietario">
 				<input type="hidden" name="documento" value='.$key->documento.'>
-				<button class="btn btn-info">Eliminar</button>
+				<button class="btn btn-danger">Eliminar</button>
 				</form>
 				
-				</form><form method="post" action="?controller=administrador&accion=insertarDueño">
+				</form><form method="post" action="?controller=administrador&accion=insertarPropietario">
 				<input type="hidden" name="documento" value='.$key->documento.'>
-				<button class="btn btn-info">Editar</button>
+				<button class="btn btn-warning">Editar</button>
 				</form></td>
 				</tr>';
 			} ?>

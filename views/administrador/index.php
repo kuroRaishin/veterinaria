@@ -1,14 +1,10 @@
 <?php 
 session_start();
 
-if ($_SESSION['nombre']=="" || $_SESSION==null) {
+if ($_SESSION['estado']=="" || $_SESSION==null) {
 	header("location:index.php");
 }
-require_once 'model/administrador.php';
-require_once 'model/dueno.php';
-require_once 'model/veterinaria.php';
-require_once 'model/mascota.php';
-include_once 'views/menu.html';
+include_once 'views/administrador/menu.php';
  ?>
  <div class="container">
 	 <ul class="nav navbar-right">
