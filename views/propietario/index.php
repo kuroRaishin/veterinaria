@@ -1,5 +1,8 @@
 <?php 
 include_once 'views/propietario/menu.php';
+if ($_SESSION['estado']!= 3) {
+  header("location:index.php");
+  }
  ?>
  <div class="container">
  	<div class="row">
@@ -26,7 +29,8 @@ include_once 'views/propietario/menu.php';
  					<h3><b>Fecha de Creación</b></h3>
  					<h4 class="text-right"><?php echo $stmt['fecha_creacion']; ?></h4><hr>
  					<br>
- 					<button class="btn btn-block btn-primary">Actualizar</button>
+ 					<a href="?controller=cliente&accion=actualizarDatos" class="btn btn-block btn-primary">
+ 					Actualizar</a>
  				</div>
  			</div>
  		</div>
@@ -57,7 +61,7 @@ include_once 'views/propietario/menu.php';
  							 ?>
  						</table>
  					</div>
- 					<button class="btn btn-block btn-success"><h4>Registrar Nueva Mascota</h4></button>
+ 					<a href="?controller=cliente&accion=addPet" class="btn btn-block btn-success"><h4>Registrar Nueva Mascota</h4></a>
  				</div>
  			</div>
  		</div>

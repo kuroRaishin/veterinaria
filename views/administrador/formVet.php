@@ -2,27 +2,33 @@
 
 error_reporting();
 include_once 'views/administrador/menu.php';
-
+ if ($_SESSION['estado']!= 1) {
+	header("location:index.php");
+}
 //NOTA: Esta página se utiliza para insertar y actualizar. Si llega el documento, el título del panel cambia a Actualizar y el action del form va a actualizar(), si la variable documento llega vacía entonces el panel dice Insertar y el form va a insertar()
 
 if($_REQUEST['documento']!=""){
-	$direccion='?controller=Administrador&accion=editar';
+	$direccion='?controller=Administrador&accion=editarVet';
 	$titulo="Actualizar";
+	$serv='<div class="form-group">
+			<b>Servicios selecionados: </b><p>'.$stmt['id_servicios'].'</p>
+				<label for="estado">Habilitar Edición</label>
+				<input type="checkbox" name="serv" value="1">
+			</div>';
+	$read='true';
 
 	//Mostrar u ocultar campo de Estado, la idea es que al insertar no aparezca y que por defecto el usuario quede activo al registrarse. Por otro lado, al actualizar sí debe aparecer para poderlo cambiar.
-	$estado='
+	$dir='
 		<div class="form-group">
-			<label for="estado">Estado</label>
-			<select name="estado" id="estado" required class="form-control">
-				<option value="1">Activo</option>
-				<option value="0">Inactivo</option>
-			</select>
+		<b>Direccion Actual: </b><p>'.$stmt['direccion'].'</p>
+			<label for="estado">Habilitar Edición</label>
+			<input type="checkbox" name="dir" value="1">
 		</div>
 	';
 }else{
 	$direccion='?controller=Administrador&accion=insertarVet';
 	$titulo="Insertar Nuevo";
-	$estado='';
+	$read='false';
 }
 
 
@@ -76,6 +82,8 @@ if($_REQUEST['documento']!=""){
 				<label for="email">Correo</label>
 					<input type="email" id="email"  name="email" class="form-control" required value=<?php echo $stmt['email'];?> >
 				</div>
+				<hr>
+				<?php echo $dir; ?>
 				<label>Dirección</label>
 				<div class="form-inline">
 
@@ -123,34 +131,21 @@ if($_REQUEST['documento']!=""){
 				</div>	
 				<div class="form-group">
 					<label>Imagen</label>
-					<input type="file" name="imagen" class="form-control" required=>
+					<input type="file" name="imagen" class="form-control">
 				</div>
 				<br>
 				<div class="form-group">
 					<label>Descripcion</label>
-					<textarea type="text" name="descripcion" class="form-control" rows="5" required></textarea>
+					<textarea type="text" name="descripcion" class="form-control" rows="5" required ><?php echo $stmt['descripcion'];?></textarea>
 					
 				</div>			
 				<hr>
 				<div class="from-group">
 				<label for="password">Contraseña</label>
-					<input type="password" id="password" name="password" class="form-control" required value=<?php echo $stmt['password'];?> >
+					<input type="password" id="password" name="password" class="form-control" required readonly=<?php echo $read; ?> >
 				</div>
 				<br>
-				
-				<!-- 
-				<label>Servicios</label>
-				<div class="form-group">
-					<label class="checkbox-inline"><input name="serv1" type="checkbox" value="1,">Option 1</label>
-					<label class="checkbox-inline"><input name="serv2" type="checkbox" value="2,">Option 2</label>
-					<label class="checkbox-inline"><input name="serv3" type="checkbox" value="3,">Option 3</label>
-					<label class="checkbox-inline"><input name="serv4" type="checkbox" value="4,">Option 4</label>
-					<label class="checkbox-inline"><input name="serv5" type="checkbox" value="5,">Option 5</label>
-					<label class="checkbox-inline"><input name="serv6" type="checkbox" value="6,">Option 6</label>
-					<label class="checkbox-inline"><input name="serv7" type="checkbox" value="7">Option 7</label>
-				</div>
-				  -->
-
+				<?php echo $serv; ?>
 				  <!-- servicios -->
 				  <center><h2>Selecione los servicios que presta</h2></center><hr>
             <div class="form-group">
