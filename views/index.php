@@ -1,54 +1,13 @@
 <style type="text/css">
-    img {
-        width: 120px;
-        height: 120px;
-        text-align: right;
-    }
-    .bax {
-        padding-top: 16px;
-        border-top: solid 3px #666;
-        border-bottom: solid 5px #666;
-        text-align: justify;
-    }
-    .bax > div {
-        background-color: #F4F1F1;
-        font-size: 1em;
-    }
-    .bax > div > div {
-        background-color: #fff;
-        font-size: 1em;
-    }
-    .bax > div > span{
-        text-font: italic;
-        text-decoration-style: italic;
-        text-align: right;
-        color: rgba(0,0,0,0.5);
-    }
+    
 </style>
 
-<div class="container">
-    <div class="navbar navbar-inverse">
-        <div class="navbar-header">
-            <a href="" class="navbar-brand">PET-LINE</a>
-            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="">opci&oacute;n</a></li>
-                <li><a href="">opci&oacute;n</a></li>
-                <li><a href="">opci&oacute;n</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
+<?php 
+require_once 'views/login/mainmenu.php';
+ ?>
 <div class="container content">
     <div class="box">
     <div class="center">
-        <!--<><><><><><><><><><><><><><><><><><><><><><><><><><> DEMO START <><><><><><><><><><><><><><><><><><><><><><><><><><>-->
 
         <div id="demo" class="box jplist" style="margin: 20px 0 50px 0">
 
@@ -68,7 +27,7 @@
                         data-control-type="back-button"
                         data-control-name="back-button"
                         data-control-action="back-button">
-                    <i class="fa fa-arrow-left"></i> Go Back
+                    <i class="fa fa-arrow-left"></i> Volver
                 </button>
 
                 <!-- reset button -->
@@ -78,7 +37,7 @@
                         data-control-type="reset"
                         data-control-name="reset"
                         data-control-action="reset">
-                    Reset &nbsp;<i class="fa fa-share"></i>
+                    <i class="fa fa-share">Reset</i> 
                 </button>
 
                 <!-- items per page dropdown -->
@@ -89,10 +48,10 @@
                         data-control-action="paging">
 
                     <ul>
-                        <li><span data-number="3"> 3 per page </span></li>
-                        <li><span data-number="5"> 5 per page </span></li>
-                        <li><span data-number="10" data-default="true"> 10 per page </span></li>
-                        <li><span data-number="all"> View All </span></li>
+                        <li><span data-number="3"> 3 por pág </span></li>
+                        <li><span data-number="5"> 5 por pág </span></li>
+                        <li><span data-number="10" data-default="true"> 10 por pág </span></li>
+                        <li><span data-number="all"> Ver todo </span></li>
                     </ul>
                 </div>
 
@@ -105,22 +64,22 @@
                         data-datetime-format="{year}/{month}/{day}"> <!-- {year}, {month}, {day}, {hour}, {min}, {sec} -->
 
                     <ul>
-                        <li><span data-path="default">Sort by</span></li>
-                        <li><span data-path=".title" data-order="asc" data-type="text">Title A-Z</span></li>
-                        <li><span data-path=".title" data-order="desc" data-type="text">Title Z-A</span></li>
-                        <li><span data-path=".desc" data-order="asc" data-type="text">Description A-Z</span></li>
-                        <li><span data-path=".desc" data-order="desc" data-type="text">Description Z-A</span></li>
-                        <li><span data-path=".like" data-order="asc" data-type="number">Likes asc</span></li>
-                        <li><span data-path=".like" data-order="desc" data-type="number">Likes desc</span></li>
-                        <li><span data-path=".date" data-order="asc" data-type="datetime">Date asc</span></li>
-                        <li><span data-path=".date" data-order="desc" data-type="datetime">Date desc</span></li>
+                        <li><span data-path="default">Ordenar por</span></li>
+                        <li><span data-path=".title" data-order="asc" data-type="text">Nombre A-Z</span></li>
+                        <li><span data-path=".title" data-order="desc" data-type="text">Nombre Z-A</span></li>
+                        <li><span data-path=".desc" data-order="asc" data-type="text">Desc A-Z</span></li>
+                        <li><span data-path=".desc" data-order="desc" data-type="text">Desc Z-A</span></li>
+                        <li><span data-path=".like" data-order="asc" data-type="number">Estrellas asc</span></li>
+                        <li><span data-path=".like" data-order="desc" data-type="number">Estrellas desc</span></li>
+                        <!-- <li><span data-path=".date" data-order="asc" data-type="datetime">Fecha asc</span></li>
+                        <li><span data-path=".date" data-order="desc" data-type="datetime">Fecha desc</span></li> -->
                     </ul>
                 </div>
 
-                <!-- filter by title -->
+                <!-- filtrar por titulo -->
                 <div class="text-filter-box">
 
-                    <i class="fa fa-search  jplist-icon"></i>
+                    <i class="fa fa-search  jplist-icon glyphicon glyphicon-search"></i>
 
                     <!--[if lt IE 10]>
                     <div class="jplist-label">Filter by Title:</div>
@@ -130,17 +89,17 @@
                             data-path=".title"
                             type="text"
                             value=""
-                            placeholder="Filter by Title"
+                            placeholder="por nombre.."
                             data-control-type="textbox"
                             data-control-name="title-filter"
                             data-control-action="filter"
                     />
                 </div>
 
-                <!-- filter by description -->
+                <!-- filtro por descripcion -->
                 <div class="text-filter-box">
 
-                    <i class="fa fa-search  jplist-icon"></i>
+                    <i class="fa fa-search  jplist-icon glyphicon glyphicon-search"></i>
 
                     <!--[if lt IE 10]>
                     <div class="jplist-label">Filter by Description:</div>
@@ -150,7 +109,7 @@
                             data-path=".desc"
                             type="text"
                             value=""
-                            placeholder="Filter by Description"
+                            placeholder="por desc.."
                             data-control-type="textbox"
                             data-control-name="desc-filter"
                             data-control-action="filter"
@@ -164,9 +123,9 @@
                                 data-control-type="button-filter"
                                 data-control-action="filter"
                                 data-control-name="architecture-btn"
-                                data-path=".architecture">
+                                data-path=".salud">
                                 <i class="fa fa-caret-right"></i>
-                                Architecture
+                                Salud
                         </span>
 
                         <li>
@@ -174,9 +133,9 @@
                                 data-control-type="button-filter"
                                 data-control-action="filter"
                                 data-control-name="christmas-btn"
-                                data-path=".christmas">
+                                data-path=".moda">
                                 <i class="fa fa-caret-right"></i>
-                                Christmas
+                                Moda
                         </span>
 
                         <li>
@@ -184,9 +143,9 @@
                                 data-control-type="button-filter"
                                 data-control-action="filter"
                                 data-control-name="nature-btn"
-                                data-path=".nature">
+                                data-path=".adopcion">
                                 <i class="fa fa-caret-right"></i>
-                                Nature
+                                Adopcion
                         </span>
 
                         <li>
@@ -194,9 +153,9 @@
                                 data-control-type="button-filter"
                                 data-control-action="filter"
                                 data-control-name="lifestyle-btn"
-                                data-path=".lifestyle">
+                                data-path=".cuidado">
                                 <i class="fa fa-caret-right"></i>
-                                Lifestyle
+                                Cuidado
                         </span>
 
                     </ul>
@@ -224,7 +183,7 @@
             <hr>
             <!-- data -->
             <div class="row">
-            <div class="list box text-shadow">
+                <div class="list box text-shadow">
             <!-- foreach -->
             <?php
             $i=0; 
@@ -234,82 +193,53 @@
 
                 echo '<div class="list-item box">
 
-                    <!-- img -->
-                    <div class="img left col-md-2 col-md-offset-1">
-                        <img src="src="data:image/jpg;base64,'. base64_encode($key->imagen).'""/>
-                    </div>
+                        <!-- img -->
+                        <div class="img left col-md-2 col-md-offset-1" id="imagen">
+                            <img class="img-circle" width="200" height="200" src="data:image/jpg;base64,'. base64_encode($key->imagen).'">
 
-                    <!-- data -->
-                    <div class="block right bax col-md-8">
-                        <span class="date">'.$key->fecha_creacion.'</span>
-                        <h2 class="title">'.$key->nombre_empresa.'</h2>
-                        <p class="desc">Architecture is both the process and product of planning, designing and construction. Architectural works, in the material form of buildings, are often perceived as cultural symbols and as works of art. Historical civilizations are often identified with their surviving architectural achievements.</p>
-                        <p class="like">25 Likes</p>
-                        <p class="theme">
-                            <span class="architecture">Architecture</span>
-                        </p>
-                    </div>
-                </div>';
+                        </div>
+                   
 
-                /*echo '<div class="list-item box">
-
-                    <!-- img -->
-                    <div class="img left">
-                        <img src="assets/img/thumbs/0'.$i.'.jpg" width="90" height="90" alt="" title=""/>
-                    </div>
-
-                    <!-- data -->
-                    <div class="block right">
-                        <p class="date">'.$key->fecha_creacion.'</p>
-                        <p class="title">'.$key->nombre_empresa.'</p>
-                        <p class="desc">Architecture is both the process and product of planning, designing and construction. Architectural works, in the material form of buildings, are often perceived as cultural symbols and as works of art. Historical civilizations are often identified with their surviving architectural achievements.</p>
-                        <p class="like">25 Likes</p>
-                        <p class="theme">
-                            <span class="architecture">Architecture</span>
-                        </p>
-                    </div>
-                </div>';*/
-            }
-             ?>
+                        <!-- data -->
+                        <div class="block right bax col-md-8">
+                            <span class="date">'.$key->fecha_creacion.'</span>
+                            <form method="post" action="?controller=login&accion=vet_page">
+                            <button class="btn btn-link" type="submit">
+                            <h2 class="title">'.$key->nombre_empresa.'</h2>
+                            <input type="hidden" class="hidden" name="documento" value="'.$key->documento.'">
+                            </button>
+                            </form>
+                            <p class="desc">'.substr($key->descripcion, 0, 200).'</p>
+                            <p class="like">'.$key->rating.' stars</p>
+                            <p><input id="input-21e" value="'.$key->rating.'" type="number" class="rating" readonly="true" min=0 max=5 step=0.5 data-size="xs" ></p>
+                            <p class="theme">
+                                <span class="'.$key->tags.'">'.ucwords($key->tags).'</span>
+                            </p>
+                        </div>
+                 </div>';
+                }
+            ?>
             <!-- end foreach -->
-                <!-- item 1 -->
-                <div class="list-item box">
 
-                    <!-- img -->
-                    <div class="img left">
-                        <img src="assets/img/thumbs/arch-2.jpg"  alt="" title=""/>
-                    </div>
-
-                    <!-- data -->
-                    <div class="block right">
-                        <p class="date">03/18/2012</p>
-                        <p class="title">Architecture</p>
-                        <p class="desc">Architecture is both the process and product of planning, designing and construction. Architectural works, in the material form of buildings, are often perceived as cultural symbols and as works of art. Historical civilizations are often identified with their surviving architectural achievements.</p>
-                        <p class="like">25 Likes</p>
-                        <p class="theme">
-                            <span class="architecture">Architecture</span>
-                        </p>
-                    </div>
-                </div>
 
                
-            </div>
+                </div>
             </div>
 
             <div class="box jplist-no-results text-shadow align-center">
-                <b>No results found</b>
+                <b>ho hay resultados que coincidan</b>
             </div>
 
             <!-- ios button: show/hide panel -->
             <div class="jplist-ios-button">
                 <i class="fa fa-sort"></i>
-                jPList Actions
+                Opciones de búsqueda
             </div>
 
             <!-- panel -->
             <div class="jplist-panel box panel-bottom">
 
-                <!-- items per page dropdown -->
+                <!-- items por página dropdown -->
                 <div
                         class="jplist-drop-down"
                         data-control-type="items-per-page-drop-down"
@@ -318,14 +248,14 @@
                         data-control-animate-to-top="true">
 
                     <ul>
-                        <li><span data-number="3"> 3 por pagina </span></li>
-                        <li><span data-number="5"> 5 por pagina </span></li>
-                        <li><span data-number="10" data-default="true"> 10 por pagina </span></li>
+                        <li><span data-number="3"> 3 por pág </span></li>
+                        <li><span data-number="5"> 5 por pág </span></li>
+                        <li><span data-number="10" data-default="true"> 10 por pág </span></li>
                         <li><span data-number="all"> Ver todos </span></li>
                     </ul>
                 </div>
 
-                <!-- sort dropdown -->
+                <!-- ordenar dropdown -->
                 <div
                         class="jplist-drop-down"
                         data-control-type="sort-drop-down"
@@ -336,18 +266,18 @@
 
                     <ul>
                         <li><span data-path="default">Sort by</span></li>
-                        <li><span data-path=".title" data-order="asc" data-type="text">Title A-Z</span></li>
-                        <li><span data-path=".title" data-order="desc" data-type="text">Title Z-A</span></li>
-                        <li><span data-path=".desc" data-order="asc" data-type="text">Description A-Z</span></li>
-                        <li><span data-path=".desc" data-order="desc" data-type="text">Description Z-A</span></li>
+                        <li><span data-path=".title" data-order="asc" data-type="text">Nombre A-Z</span></li>
+                        <li><span data-path=".title" data-order="desc" data-type="text">Nombre Z-A</span></li>
+                        <li><span data-path=".desc" data-order="asc" data-type="text">Descripcion A-Z</span></li>
+                        <li><span data-path=".desc" data-order="desc" data-type="text">Descripcion Z-A</span></li>
                         <li><span data-path=".like" data-order="asc" data-type="number">Likes asc</span></li>
                         <li><span data-path=".like" data-order="desc" data-type="number">Likes desc</span></li>
-                        <li><span data-path=".date" data-order="asc" data-type="datetime">Date asc</span></li>
-                        <li><span data-path=".date" data-order="desc" data-type="datetime">Date desc</span></li>
+                        <li><span data-path=".date" data-order="asc" data-type="datetime">Fecha asc</span></li>
+                        <li><span data-path=".date" data-order="desc" data-type="datetime">Fecha desc</span></li>
                     </ul>
                 </div>
 
-                <!-- pagination results -->
+                <!-- paginacion resultados -->
                 <div
                         class="jplist-label"
                         data-type="{start} - {end} of {all}"
@@ -356,7 +286,7 @@
                         data-control-action="paging">
                 </div>
 
-                <!-- pagination -->
+                <!-- paginacion -->
                 <div
                         class="jplist-pagination"
                         data-control-animate-to-top="true"
@@ -366,10 +296,8 @@
                 </div>
 
             </div>
-
         </div>
-
-        <!--<><><><><><><><><><><><><><><><><><><><><><><><><><> DEMO END <><><><><><><><><><><><><><><><><><><><><><><><><><>-->
     </div>
 </div>
 </div>
+<br>

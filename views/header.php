@@ -4,7 +4,14 @@
 	<title>Pet-Line</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Load Roboto font -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <!-- Load css Jquery and JqueryUI styles -->
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-social.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/docs.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.min.css">
@@ -13,7 +20,9 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.theme.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.theme.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/star-rating.css">
-
+    <!-- Load favicon -->
+    <link rel="shortcut icon" href="assets/image/logomin.png">
+    <!-- Load Scripts -->
 	<script type="text/javascript" src="assets/js/jquery.js"></script>
 	<script type="text/javascript" src="assets/js/jquery-ui.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
@@ -52,6 +61,10 @@
                 ,itemPath: '.list-item'
                 ,panelPath: '.jplist-panel'
             });
+            $('.carousel').carousel({
+              interval: 6000
+            });
+            $( "#tabs" ).tabs();
         });
     </script>
 </head>
