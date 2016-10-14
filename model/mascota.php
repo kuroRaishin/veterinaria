@@ -4,12 +4,18 @@
 */
 class Mascota extends Conexion
 {
-	private $nombre,$genero,$tipo,$raza,$documento,$activo,$fecha_creacion,$id_veterinaria;
+	private $id,$nombre,$genero,$tipo,$raza,$documento,$activo,$fecha_creacion,$id_veterinaria;
 	private $model;
 
 	function __construct()
 	{
 		$this->model=parent::__construct();
+	}
+	public function getId() {
+		return $this->id;
+	}
+	public function setId($id) {
+		$this->id=$id;
 	}
 	public function getNombre() {
 		return $this->nombre;
@@ -56,43 +62,34 @@ class Mascota extends Conexion
 	public function getFecha_creacion() {
 		return $this->fecha_creacion;
 	}
-	/*public function setFecha_creacion($fecha_creacion) {
+	public function setFecha_creacion($fecha_creacion) {
 		$this->fecha_creacion=$fecha_creacion;
-	}*/
+	}
 	
 	public function insertar(){
 
 		try {
 
-			$query="INSERT INTO mascota(nombre,genero,tipo,raza,documento_dueño,activo,fecha_creacion,id_veterinaria) VALUES ('".$this->nombre."','".$this->genero."','".$this->tipo."','".$this->raza."','".$this->documento."','".$this->activo."', NOW(), '".$this->fecha_creacion."')";
+			$query="INSERT INTO mascota(nombre, genero ,tipo, raza, documento, fecha_creacion, id_veterinaria) VALUES ('".$this->nombre."','".$this->genero."','".$this->tipo."','".$this->raza."','".$this->documento."','".$this->fecha_creacion."','".$this->id_veterinaria."')";
 
 			$stmt=$this->model->prepare($query);
 			$stmt->execute();
 
-			/*$query2="INSERT INTO usuario(nombre_usuario, nombre, apellido, email, password, activo, fecha_creacion, documento, rol) VALUES ('".$this->nombre_usuario."','".$this->documento."','".$this->nombre."','".$this->apellido."','".$this->email."','".$this->password."','".$this->activo."')";
-
-			$stmt=$this->model->prepare($query2);
-			$stmt->execute();*/
-
-			return "<script type='text/javascript'>
-						alert('El registro se realizó correctamente');
-						window.location='?controller=administrador&accion=index';
-						</script>";
+			return true;
 			
 		} catch (PDOException $e) {
 
-			/*return false*/ die($e->getMessage());
+			die($e->getMessage());
 			
 		}		
 	}
 
-	public function actualizar(){//pendiente
+	public function actualizar(){
 
 		try {
 
-			$query="UPDATE usuario U INNER JOIN dueño D ON U.documento_usuario=D.documento SET U.documento='".$this->documento."', U.password='".$this->password."', D.nombre='".$this->nombre."', D.apellido='".$this->apellido."', D.rol='".$this->rol."', D.documento='".$this->documento."', D.email='".$this->email."' WHERE U.documento_usuario='".$this->documento."'";
-			// $query="UPDATE usuarios U INNER JOIN instructores I ON U.documento=I.documento SET U.documento='".$this->documento."', U.password='".$this->password."', I.nombre='".$this->nombre."', I.apellido='".$this->apellido."', I.rol='".$this->rol."', I.documento='".$this->documento."', I.email='".$this->email."' WHERE U.usuario='".$this->user."'";
-
+			$query="UPDATE mascota SET documento='".$this->documento."', nombre='".$this->nombre."',  raza='".$this->raza."', tipo='".$this->tipo."', genero='".$this->genero."' WHERE id_mascota='".$this->id."'";
+			
 			$stmt=$this->model->prepare($query);
 			$stmt->execute();
 
@@ -106,43 +103,48 @@ class Mascota extends Conexion
 	}
 
 
-	public function eliminar(){//Elimina registros de dos tablas con el usuario, email o documento
+	public function eliminar($id){//Bloquea los registros de la tabla mascota
 
 		try {
 
-			/*$query="DELETE U.*,I.* FROM usuarios U INNER JOIN instructores I ON U.documento=I.documento WHERE U.documento='".$this->documento."'";
-
-			$stmt=$this->model->prepare($query);
-			$stmt->execute();*/
-
-			$query="UPDATE mascota  SET activo='0' WHERE documento_dueño='".$this->documento."'";
+			$query="UPDATE mascota  SET activo=0 WHERE id_mascota='".$id."'";
 			$stmt=$this->model->prepare($query);
 			$stmt->execute();
-			return "<script type='text/javascript'>
-						alert('El registro se realizó correctamente');
-						window.location='?controller=administrador&accion=index';
-						</script>";;
+			return true;
 			
 		} catch (PDOException $e) {
 
-			return $e.getMessage();
+			return $e->getMessage();
 			
 		}		
 	}
 
 	public function listar() {
 
-		$query="SELECT * FROM mascota";
-
+		$query="SELECT * FROM mascota WHERE activo=1";
 		$stmt=$this->model->prepare($query);
 		$stmt->execute();
 		return $stmt->fetchAll(PDO::FETCH_OBJ);
 	}
-	public function listarId($documento){
-		$query="SELECT * FROM mascota WHERE documento_dueño='".$documento."'";
+
+	public function listarId($id){
+		$query="SELECT * FROM mascota WHERE id_mascota='".$id."' AND activo=1";
 		$stmt=$this->model->prepare($query);
 		$stmt->execute();
 		return $stmt->fetch(PDO::FETCH_ASSOC);
+	}
+	public function listarPropietario(){
+		$query="SELECT * FROM mascota WHERE documento='".$this->documento."' AND activo=1";
+		$stmt=$this->model->prepare($query);
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_OBJ);
+	}
+
+	public function listarVet(){
+		$query="SELECT * FROM mascota WHERE id_veterinaria='".$this->id_veterinaria."' AND activo=1";
+		$stmt=$this->model->prepare($query);
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_OBJ);
 	}
 }
  ?>
