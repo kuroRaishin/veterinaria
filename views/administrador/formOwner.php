@@ -2,7 +2,9 @@
 
 error_reporting('0');
 include_once 'views/administrador/menu.php';
-
+ if ($_SESSION['estado']!= 1) {
+	header("location:index.php");
+}
 //NOTA: Esta página se utiliza para insertar y actualizar. Si llega el documento, el título del panel cambia a Actualizar y el action del form va a actualizar(), si la variable documento llega vacía entonces el panel dice Insertar y el form va a insertar()
 
 if($_REQUEST['documento']!=""){

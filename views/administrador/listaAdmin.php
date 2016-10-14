@@ -1,4 +1,8 @@
-<?php include_once 'views/administrador/menu.php'; error_reporting('0'); ?>
+<?php include_once 'views/administrador/menu.php'; error_reporting('0'); 
+ if ($_SESSION['estado']!= 1) {
+	header("location:index.php");
+}
+?>
 
 <div class="row">
 	<div class="col-md-2">

@@ -60,11 +60,11 @@ class Propietario extends Conexion
 		$this->activo=$activo;
 	}
 	public function getFecha_creacion() {
-		return $this->fecha_creacion;/*aaaa-mm-dd 00:00:00*/
+		return $this->fecha_creacion;/*aaaa-mm-dd*/
 	}
-	/*public function setFecha_creacion($fecha_creacion) {
+	public function setFecha_creacion($fecha_creacion) {
 		$this->fecha_creacion=$fecha_creacion;
-	}*/
+	}
 	public function getPassword() {
 		return $this->password;
 	}
@@ -82,7 +82,7 @@ class Propietario extends Conexion
 
 		try {
 
-			$query="INSERT INTO propietario(nombre,apellido,documento,genero,email,direccion,telefono) VALUES ('".$this->nombre."','".$this->apellido."','".$this->documento."','".$this->genero."','".$this->email."','".$this->direccion."','".$this->telefono."')";
+			$query="INSERT INTO propietario(nombre,apellido,documento,genero,email,direccion,telefono,fecha_creacion) VALUES ('".$this->nombre."','".$this->apellido."','".$this->documento."','".$this->genero."','".$this->email."','".$this->direccion."','".$this->telefono."','".$this->fecha_creacion."')";
 
 			$stmt=$this->model->prepare($query);
 			$stmt->execute();
@@ -91,10 +91,7 @@ class Propietario extends Conexion
 
 			$stmt=$this->model->prepare($query2);
 			$stmt->execute();
-			return "<script type='text/javascript'>
-						alert('El registro se realizó correctamente');
-						window.location='?controller=administrador&accion=index';
-						</script>";
+			return true;
 			
 		} catch (PDOException $e) {
 
@@ -107,7 +104,7 @@ class Propietario extends Conexion
 
 		try {
 
-			$query="UPDATE usuario U INNER JOIN propietario P ON U.documento=P.documento SET U.documento='".$this->documento."', U.password='".$this->password."', P.nombre='".$this->nombre."', P.apellido='".$this->apellido."', U.rol='".$this->rol."', P.documento='".$this->documento."', P.email='".$this->email."', U.email='".$this->email."', P.telefono='".$this->telefono."', P.direccion='".$this->direccion."' WHERE U.documento='".$this->documento."'";
+			$query="UPDATE usuario SET nombre='".$this->nombre."', apellido='".$this->apellido."', P.genero='".$this->genero."', email='".$this->email."', telefono='".$this->telefono."', direccion='".$this->direccion."' WHERE documento='".$this->documento."'";
 
 			$stmt=$this->model->prepare($query);
 			$stmt->execute();
@@ -116,7 +113,7 @@ class Propietario extends Conexion
 			
 		} catch (PDOException $e) {
 
-			return false;
+			return $e->getMessage();
 			
 		}		
 	}

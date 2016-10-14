@@ -49,4 +49,15 @@ class Usuario extends Conexion
 		$stmt->execute();
 		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
+
+	public function cambio_password(){
+		try {
+			$query = "UPDATE usuario SET password='".$this->password."' WHERE documento='".$this->documento."'";
+			$stmt = $this->model->prepare($query); 
+			$stmt->execute();
+			return true;
+		} catch (PDOException $e) {
+			die($e->getMessage());
+		}
+	}
 }

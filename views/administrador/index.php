@@ -1,20 +1,20 @@
 <?php 
-session_start();
+//session_start();
 
-if ($_SESSION['estado']=="" || $_SESSION==null) {
+ if ($_SESSION['estado']!= 1) {
 	header("location:index.php");
 }
 include_once 'views/administrador/menu.php';
  ?>
- <div class="container">
+ <!-- <div class="container">
 	 <ul class="nav navbar-right">
 		<li><button class="btn btn-info"><span class="glyphicon glyphicon-log-out"></span> <a href="?controller=login&accion=salir">SALIR</a></button></li>
 	</ul>
- </div>
+ </div> -->
 
 
 <div class="title">
-	<h1>PAGINA DE ADMINISTRADOR <?php echo$_SESSION['nombre']; ?> </h1>
+	<h1 class="text-center">PAGINA DE ADMINISTRADOR <?php echo$_SESSION['nombre']; ?> </h1>
 </div>
 
 

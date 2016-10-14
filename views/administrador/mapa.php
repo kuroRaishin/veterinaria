@@ -1,4 +1,8 @@
-<?php include_once 'views/administrador/menu.php'; ?>
+<?php include_once 'views/administrador/menu.php'; 
+ if ($_SESSION['estado']!= 1) {
+  header("location:index.php");
+}
+?>
 <div class="row">
 	<div class="col-md-2">
 		<?php include_once 'views/administrador/adminMenu.php'; ?>
@@ -8,6 +12,9 @@
         	<h2>Aqui irá el mapa!</h2>
     	</div>
 	</div>
+</div>
+<div id="map">
+  <img src="http://petline.esy.es/geolocalizacion2.html">
 </div>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js" ></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL_7-6zzI4qzB8qqjdiC8vgC9pEYefDSM"></script>
@@ -57,7 +64,7 @@
        
        $.ajax({
                type:"POST",
-               url:"vetajax.php",
+               url:"views/administrador/ventajax.php",
                dataType:"JSON",
                data:"&tipo=listar",
                success:function(data){

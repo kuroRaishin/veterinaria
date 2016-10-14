@@ -1,5 +1,6 @@
 <?php 
 error_reporting();
+session_start();
 require_once 'model/administrador.php';
 require_once 'model/propietario.php';
 require_once 'model/veterinaria.php';
@@ -75,8 +76,8 @@ class AdministradorControlador{
 		require_once 'views/footer.php';
 	}
 	public function formularioVet(){
-		$propietario = $this->owner;
-		$stmt= $propietario->listarId($_REQUEST['documento']);
+		$veterinarias = $this->vet;
+		$stmt= $veterinarias->listarId($_REQUEST['documento']);
 		require_once 'views/header.php';
 		require_once 'views/administrador/formVet.php';
 		require_once 'views/footer.php';
@@ -125,10 +126,12 @@ class AdministradorControlador{
 			}
 			else
 			{
+				$fecha_creacion=date("Y-m-d");
 				$propietario->setDocumento($_REQUEST['documento']);
 				$propietario->setNombre($_REQUEST['nombre']);
 				$propietario->setApellido($_REQUEST['apellido']);
 				$propietario->setRol($rol);
+				$propietario->setFecha_creacion($fecha_creacion);
 				$propietario->setGenero($_REQUEST['genero']);		
 				$propietario->setDireccion($_REQUEST['direccion']);		
 				$propietario->setTelefono($_REQUEST['telefono']);		
@@ -218,12 +221,31 @@ class AdministradorControlador{
 						alert('El registro se bloqueó correctamente');
 						window.location='?controller=administrador&accion=listaPropietario';
 						</script>";
-			header('location:?controller=administrador&action=listaPropietario');
+			//header('location:?controller=administrador&action=listaPropietario');
 		}
 		else{
 			echo "<script type='text/javascript'>
-						alert('El registro no se pudo bloquear');
+						alert('ERROR El registro no se pudo bloquear');
 						window.location='?controller=administrador&accion=listaPropietario';
+						</script>";
+		}
+	}
+
+	public function eliminarVeterinaria(){
+		$veterinarias=$this->vet;
+		$veterinarias->setDocumento($_REQUEST['documento']);
+		$stmt=$veterinarias->eliminar($veterinarias);
+
+		if ($stmt==true) {
+			echo "<script type='text/javascript'>
+						alert('El registro se bloqueó correctamente');
+						window.location='?controller=administrador&accion=listaVet';
+						</script>";
+		}
+		else{
+			echo "<script type='text/javascript'>
+						alert('ERROR El registro no se pudo bloquear');
+						window.location='?controller=administrador&accion=listaVet';
 						</script>";
 		}
 	}
@@ -233,7 +255,6 @@ class AdministradorControlador{
 		$administrador->setDocumento($_REQUEST['documento']);
 		$administrador->setNombre($_REQUEST['nombre']);
 		$administrador->setApellido($_REQUEST['apellido']);
-		$administrador->setRol($_REQUEST['rol']);
 		$administrador->setTelefono($_REQUEST['telefono']);		
 		$administrador->setPassword($_REQUEST['password']);
 		$administrador->setPassword($_REQUEST['password']);
@@ -284,6 +305,48 @@ class AdministradorControlador{
 						window.location='?controller=administrador&accion=listaPropietario';
 						</script>";
 		}
+	}
+
+	public function editarVet(){
+		$veterinarias=$this->vet;
+		if ($_REQUEST['dir']==1) {
+			$direccion=$_REQUEST['1']." ".$_REQUEST['2']." ".$_REQUEST['3']." ".$_REQUEST['4'].$_REQUEST['5']." ".$_REQUEST['6']." ".$_REQUEST['7']." Bogotá - Colombia";
+			$return = $veterinarias->getCoordenadas($direccion);
+				
+		}
+		if ($_REQUEST['serv']==1) {
+			$servicios=$_REQUEST['serv1'].$_REQUEST['serv2'].$_REQUEST['serv3'].$_REQUEST['serv4'].$_REQUEST['serv5'].$_REQUEST['serv6'].$_REQUEST['serv7'].$_REQUEST['serv8'].$_REQUEST['serv9'].$_REQUEST['serv10'].$_REQUEST['serv11'].$_REQUEST['serv12'].$_REQUEST['serv13'].$_REQUEST['serv14'];	
+		}
+			
+		$imagen=addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
+		$veterinarias->setNombre_empresa($_REQUEST['empresa']);
+		$veterinarias->setNombre($_REQUEST['nombre']);
+		$veterinarias->setApellido($_REQUEST['apellido']);
+		$veterinarias->setEmail($_REQUEST['email']);
+		$veterinarias->setDireccion($direccion);
+		$veterinarias->setLatVet($latVet);
+		$veterinarias->setLonVet($lonVet);
+		$veterinarias->setFecha_creacion($fecha_creacion);
+		$veterinarias->setTelefono($_REQUEST['telefono']);
+		$veterinarias->setId_servicios($servicios);
+		$veterinarias->setDescripcion($_REQUEST['descripcion']);
+		$veterinarias->setImagen($imagen);
+
+		$stmt=$veterinarias->actualizar($veterinarias);
+		
+		if ($stmt==true) {
+			echo "<script type='text/javascript'>
+						alert('El registro se actualizo correctamente');
+						window.location='?controller=administrador&accion=listaVet';
+						</script>";
+		}
+		else{
+			echo "<script type='text/javascript'>
+						alert('El registro no se pudo actualizar');
+						window.location='?controller=administrador&accion=listaVet';
+						</script>";
+		}
+		
 	}
 	
 }

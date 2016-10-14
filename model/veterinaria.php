@@ -4,7 +4,7 @@
 */
 class Veterinaria extends Conexion
 {
-	private $nombre_empresa,$documento,$nombre,$apellido,$email,$genero,$direccion,$telefono,$activo,$fecha_creacion,$id_servicios,$imagen,$rating,$descripcion,$latVet,$lonVet,$password,$rol;
+	private $nombre_empresa,$documento,$nombre,$apellido,$email,$genero,$direccion,$telefono,$activo,$fecha_creacion,$id_servicios,$imagen,$rating,$descripcion,$latVet,$lonVet,$password,$rol,$tags;
 	private $model;
 
 	function __construct()
@@ -114,10 +114,16 @@ class Veterinaria extends Conexion
 		$this->password = $password;
 	}
 	public function getRol() {
-		return $this->nombre;
+		return $this->rol;
 	}
 	public function setRol($rol){
 		$this->rol = $rol;
+	}
+	public function getTags() {
+		return $this->tags;
+	}
+	public function setTags($tags){
+		$this->tags = $tags;
 	}
 	public function insertar(){
 
@@ -164,18 +170,18 @@ class Veterinaria extends Conexion
 
 		try {
 
-			$query="UPDATE veterinaria SET activo=0 WHERE documento='".$this->documento;
+			$query="UPDATE veterinaria SET activo=0 WHERE documento='".$this->documento."'";
 			$stmt=$this->model->prepare($query);
 			$stmt->execute();
 
-			$query2="UPDATE usuario SET activo=0 WHERE documento='".$this->documento;
+			$query2="UPDATE usuario SET activo=0 WHERE documento='".$this->documento."'";
 			$stmt=$this->model->prepare($query2);
 			$stmt->execute();
 			return true;
 			
 		} catch (PDOException $e) {
 
-			return $e.getMessage();
+			return $e->getMessage();
 			
 		}		
 	}
@@ -190,7 +196,7 @@ class Veterinaria extends Conexion
 	}
 
 	public function listarId(){
-		$query="SELECT * FROM veterinaria WHERE documento='".$documento."'";
+		$query="SELECT * FROM veterinaria WHERE documento='".$this->documento."'";
 		$stmt=$this->model->prepare($query);
 		$stmt->execute();
 		return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -198,7 +204,7 @@ class Veterinaria extends Conexion
 
 	public function listaServicios() {
 
-		$query="SELECT * FROM servicios ORDER BY nombre";
+		$query="SELECT * FROM servicios ";
 
 		$stmt=$this->model->prepare($query);
 		$stmt->execute();
@@ -208,6 +214,8 @@ class Veterinaria extends Conexion
 	function getCoordenadas($address){
     $address = urlencode($address);
     $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=" . $address;
+
+    //"https://maps.googleapis.com/maps/api/js?key=AIzaSyDL_7-6zzI4qzB8qqjdiC8vgC9pEYefDSM"
     $response = file_get_contents($url);
     $json = json_decode($response,true);
  
