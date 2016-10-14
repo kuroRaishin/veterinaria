@@ -1,33 +1,29 @@
- <?php 
+<?php 
+include_once 'views/veterinaria/menu.php';
+error_reporting(0);
 
-error_reporting('0');
-include_once 'views/administrador/menu.php';
- if ($_SESSION['estado']!= 1) {
+if ($_SESSION['estado']!= 2) {
 	header("location:index.php");
 }
-//NOTA: Esta página se utiliza para insertar y actualizar. Si llega el documento, el título del panel cambia a Actualizar y el action del form va a actualizar(), si la variable documento llega vacía entonces el panel dice Insertar y el form va a insertar()
 
 if($_REQUEST['documento']!=""){
-	$direccion='?controller=Administrador&accion=editarPropietario';
+	$direccion='?controller=veterinaria&accion=editarCliente';
 	$titulo="Actualizar";
-	$readonly="readonly='readonly'";
+	$readonly="readonly='true'";
 }else{
-	$direccion='?controller=Administrador&accion=insertarPropietario';
+	$direccion='?controller=veterinaria&accion=clienteNew';
 	$titulo="Insertar Nuevo";
 }
 
 
-/*var_dump($stmt);*/
-
  ?>
-
-<div class="row">
-	<div class="col-md-2">
-	    <?php include_once 'views/administrador/adminMenu.php'; ?>
-	</div>
-	<div class="col-md-8 col-md-offset-1">
-
-	<div class="panel panel-info">
+<center><h1>Panel de Control</h1><h2>Veterinaria <?php echo $_SESSION['nombre']; ?></h2></center>
+ <div class="row">
+ 	<div class="col-md-3">
+ 		<?php include_once'views/veterinaria/menuVet.php'; ?>
+ 	</div>
+ 	<div class="col-md-8">
+ 		<div class="panel panel-info">
 		<div class="panel-heading">
 			<h3 class="text-center"><?php echo $titulo; ?></h3>
 		</div>
@@ -49,6 +45,7 @@ if($_REQUEST['documento']!=""){
 				<div class="from-group">
 				<label for="genero">Genero</label>
 					<select name="genero" id="genero" required class="form-control">
+						<option value=NULL></option>
 						<option value="masculino">Masculino</option>
 						<option value="femenino">Femenino</option>
 					</select>
@@ -72,9 +69,9 @@ if($_REQUEST['documento']!=""){
 				<label for="password">Contraseña</label>
 					<input type="password" id="password" name="password" <?php echo $readonly; ?> class="form-control" required value=<?php echo $stmt['password'];?> >
 				</div><br>
-				<input type="submit" value="Enviar" class="btn btn-success " onclick="validar()" >
+				<input type="submit" value="Enviar" class="btn btn-success btn-block" onclick="validar()" >
 			</form>
 		</div>
 	</div>
-	</div>	
-</div> 
+ 	</div>
+ </div>

@@ -1,4 +1,8 @@
-<?php include_once 'views/administrador/menu.php'; error_reporting('0'); ?>
+<?php include_once 'views/administrador/menu.php'; error_reporting('0'); 
+ if ($_SESSION['estado']!= 1) {
+	header("location:index.php");
+}
+?>
 
 <div class="row">
 	<div class="col-md-2">
@@ -36,12 +40,12 @@
 				<td>'.$key->direccion.'</td>
 				<td>'.$key->telefono.'</td>
 				<td>
-				<form method="post" action="?controller=administrador&accion=eliminar_dueno">
+				<form method="post" action="?controller=administrador&accion=eliminarVeterinaria">
 				<input type="hidden" name="documento" value='.$key->documento.'>
 				<button class="btn btn-info">Eliminar</button>
 				</form>
 				
-				</form><form method="post" action="?controller=dueno&accion=insertar">
+				<form method="post" action="?controller=administrador&accion=insertarVet">
 				<input type="hidden" name="documento" value='.$key->documento.'>
 				<button class="btn btn-info">Editar</button>
 				</form>

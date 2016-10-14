@@ -1,3 +1,4 @@
+
 <!--
  __    __   __      __  __________     _________
 |  |  / /  |  |    |  | |         |   / ___     \
@@ -70,6 +71,7 @@
 		<a href="#slide" class="right carousel-control" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 
 </div>
+<!--  carousel end-->
 <!-- modal login -->
 <div id="modal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
@@ -80,10 +82,10 @@
 			<div class="panel panel-success ">
 			<div class="panel-heading"><h1 class="text-center">Iniciar Sesión</h1></div>
 			<div class="panel-body">
-			<form method="post" action="?controller=login&accion=logeo">
+			<form method="post" action="?controller=login&accion=logeo" id="logeo">
 				
 				<div class="form-group">
-					<label for="usuario">correo</label>
+					<label for="email">correo</label>
 					<input type="text" name="email" class="form-control" title="correo "  required="required">
 				</div>
 				<div class="form-group">
@@ -99,7 +101,7 @@
 
 			</form>	
 			<hr>
-				<a href=""><button class="btn btn-info">no esta registrado? Registrar</button></a>
+				<b>no esta registrado? </b><a href="?controller=login&accion=opcion"><button class="btn btn-info"> Registrar</button></a>
 			</div>
 			</div>
 	
@@ -113,7 +115,6 @@
 	</div>
 </div>
 <!-- modal login end -->
-<!--  carousel end-->
 <div class="section">
 	<div class="title">
 		<h1>BUSQUEDAS</h1>
@@ -153,30 +154,53 @@
 </div>
 
 <div class="container">
-	<div class="row">
-		<div class="col-md-3">
-			<h3 class="text-justify"><strong>notice</strong></h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-		</div>
-		<div class="col-md-3">
-			<h3 class="text-justify"><strong>notice</strong></h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-		</div>
-		<div class="col-md-3">
-			<h3 class="text-justify"><strong>notice</strong></h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-		</div>
-		<div class="col-md-3">
-			<h3 class="text-justify"><strong>notice</strong></h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-		</div>
+	<div class="row" id="noticias">
+		<div class="carousel slide" id="notice">
+        <div class="carousel-inner">
+        	<div class="item active">
+                <ul class="thumbnails">
+            <?php 
+            	foreach ($stmt as $key) {
+            		echo '
+            	
+                        <li class="col-sm-3">
+    						<div class="fff">
+								<div class="thumbnail">
+									<a href="#"><img class="img-responsive" width="200" height="200" src="data:image/jpg;base64,'. base64_encode($key->imagen).'"></a>
+								</div>
+								<div class="caption">
+									<h4>'.$key->titulo.'</h4>
+									<p>'.substr($key->descripcion, 0, 100).'</p>
+									<a class="btn btn-mini" href="?controller=login&">» Ver más</a>
+								</div>
+                            </div>
+                        </li>
+                    ';
+            	}
+             ?>
+             	
+             	</ul>
+            </div>
+            <!-- /Slide1 360x240--> 
+        </div>
+
+	   <nav>
+			<ul class="control-box pager">
+				<li><a data-slide="prev" href="#notice" class=""><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+				<li><a data-slide="next" href="#notice" class=""><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+			</ul>
+		</nav>
+	   <!-- /.control-box -->   
+                              
+    	</div>
 	</div>
 </div>
-
+<div class="section">
+	<div class="title">
+		<h1>ADOPCION</h1>
+		<p>Encuentra la opción más cercana, o ubica la opcion mas cercana en el mapa. para adoptar tu nuevo compañero.</p>
+	</div>
+</div>
 <div class="container">
 <div class="row">
 	<div class="col-md-6 primary-section">
@@ -293,4 +317,3 @@
     //PLANTILLA AJAX
     
 </script>
-<!-- 
