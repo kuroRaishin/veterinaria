@@ -1,8 +1,9 @@
 <?php 
-include_once 'views/veterinaria/menu.php';
+require_once 'views/login/mainmenu.php';
 if ($_SESSION['estado']!= 2) {
   header("location:index.php");
-error_reporting();
+}
+error_reporting(0);
 if($_REQUEST['id']!=""){
 	$direccion='?controller=veterinaria&accion=editarPet';
 	$titulo="Actualizar";

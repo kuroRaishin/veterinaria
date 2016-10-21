@@ -15,7 +15,7 @@ if($_REQUEST['documento']!=""){
 				<label for="estado">Habilitar Edición</label>
 				<input type="checkbox" name="serv" value="1">
 			</div>';
-	$read='true';
+	$read='readonly="true"';
 
 	//Mostrar u ocultar campo de Estado, la idea es que al insertar no aparezca y que por defecto el usuario quede activo al registrarse. Por otro lado, al actualizar sí debe aparecer para poderlo cambiar.
 	$dir='
@@ -34,13 +34,13 @@ if($_REQUEST['documento']!=""){
 
 
  ?>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 		$(document).ready(function(e){
     		$(".img-check").click(function(){
 				$(this).toggleClass("check");
 			});
 	});
-	</script>
+	</script> -->
 	<style type="text/css">
 	.check{
     	opacity:0.5;
@@ -142,7 +142,19 @@ if($_REQUEST['documento']!=""){
 				<hr>
 				<div class="from-group">
 				<label for="password">Contraseña</label>
-					<input type="password" id="password" name="password" class="form-control" required readonly=<?php echo $read; ?> >
+					<input type="password" id="password" name="password" class="form-control" required <?php echo $read; ?> >
+				</div>
+				<br>
+				<div class="form-group">
+					<label>Tags de Busqueda</label><br>
+					<p>
+					<input type="checkbox" name="tag1" value="salud,">salud</p>
+					<p>
+					<input type="checkbox" name="tag2" value="moda,">moda</p>
+					<p>
+					<input type="checkbox" name="tag3" value="adopcion,">adopcion</p>
+					<p>
+					<input type="checkbox" name="tag4" value="cuidado">cuidado</p>
 				</div>
 				<br>
 				<?php echo $serv; ?>
@@ -150,96 +162,21 @@ if($_REQUEST['documento']!=""){
 				  <center><h2>Selecione los servicios que presta</h2></center><hr>
             <div class="form-group">
             <center>  
-              <div class="col-md-3 col-sm-6">
-                <label class="btn btn-primary">
-                  <img src="assets/img/icons/medico.jpg" alt="medico veterinario" class="img-thumbnail img-check"><input type="checkbox" name="serv1" id="item4" value="1," class="hidden" autocomplete="off">
+              <?php 
+				foreach ($stmt2 as $key) {
+					$i++;
+				echo '<div class="col-md-4 col-sm-6">
+                <label class="btn btn-default">
+                  <img src="data:image/jpg;base64,'. base64_encode($key->imagen).'" alt="'.$key->nombre.'" class="img-thumbnail img-check"><input type="checkbox" name="serv'.$i.'" id="item4" value="'.$key->nombre.'," class="hidden" autocomplete="off">
                 </label>
-              </div>
-            
-            <div class="col-md-3 col-sm-6">
-              <label class="btn btn-primary">
-                <img src="assets/img/icons/urgencia.jpg" alt="Urgencias" class="img-thumbnail img-check"><input type="checkbox" name="serv2" id="item4" value="2," class="hidden" autocomplete="off">
-              </label>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-              <label class="btn btn-primary">
-                <img src="assets/img/icons/cirugia.jpg" alt="Cirugias" class="img-thumbnail img-check"><input type="checkbox" name="serv3" id="item4" value="3," class="hidden" autocomplete="off">
-              </label>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-              <label class="btn btn-primary">
-                <img src="assets/img/icons/hospital.jpg" alt="Hospitalización" class="img-thumbnail img-check"><input type="checkbox" name="serv4" id="item4" value="4," class="hidden" autocomplete="off">
-              </label>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-              <label class="btn btn-primary">
-                <img src="assets/img/icons/medicina.jpg" alt="Medicinas" class="img-thumbnail img-check"><input type="checkbox" name="serv4" id="item4" value="5," class="hidden" autocomplete="off">
-              </label>
-            </div>
-            
-            <div class="col-md-3 col-sm-6">
-              <label class="btn btn-primary">
-                <img src="assets/img/icons/lab.jpg" alt="Laboratorio" class="img-thumbnail img-check"><input type="checkbox" name="serv4" id="item4" value="6," class="hidden" autocomplete="off">
-              </label>
-            </div>
-            
-            <div class="col-md-3 col-sm-6">
-              <label class="btn btn-primary">
-                <img src="assets/img/icons/terapia.jpg" alt="Terapias" class="img-thumbnail img-check"><input type="checkbox" name="serv4" id="item4" value="7," class="hidden" autocomplete="off">
-              </label>
-            </div>
-            
-            <div class="col-md-3 col-sm-6">
-              <label class="btn btn-primary">
-                <img src="assets/img/icons/vavuna.jpg" alt="Vacunacion" class="img-thumbnail img-check"><input type="checkbox" name="serv4" id="item4" value="8," class="hidden" autocomplete="off">
-              </label>
-            </div>
-            
-            <div class="col-md-3 col-sm-6">
-              <label class="btn btn-primary">
-                <img src="assets/img/icons/funeraria.jpg" alt="Funeraria" class="img-thumbnail img-check"><input type="checkbox" name="serv4" id="item4" value="9," class="hidden" autocomplete="off">
-              </label>
-            </div>
-            
-            <div class="col-md-3 col-sm-6">
-              <label class="btn btn-primary">
-                <img src="assets/img/icons/guarderia.jpg" alt="Guarderia" class="img-thumbnail img-check"><input type="checkbox" name="serv4" id="item4" value="10," class="hidden" autocomplete="off">
-              </label>
-            </div>
-            
-            <div class="col-md-3 col-sm-6">
-              <label class="btn btn-primary">
-                <img src="assets/img/icons/adiestramiento.jpg" alt="Adiestramiento" class="img-thumbnail img-check"><input type="checkbox" name="serv11" id="item4" value="11," class="hidden" autocomplete="off">
-              </label>
-            </div>
-            
-            <div class="col-md-3 col-sm-6">
-              <label class="btn btn-primary">
-                <img src="assets/img/icons/accesorios.jpg" alt="Accesorios" class="img-thumbnail img-check"><input type="checkbox" name="serv12" id="item4" value="12," class="hidden" autocomplete="off">
-              </label>
-            </div>
-            
-            <div class="col-md-3 col-sm-6">
-              <label class="btn btn-primary">
-                <img src="assets/img/icons/odontologia.jpg" alt="Odontologia" class="img-thumbnail img-check"><input type="checkbox" name="serv13" id="item4" value="13," class="hidden" autocomplete="off">
-              </label>
-            </div>
-            
-            <div class="col-md-3 col-sm-6" >
-              <label class="btn btn-primary">
-                <img src="assets/img/icons/peluqueria.jpg" alt="Peluqueria" class="img-thumbnail img-check"><input type="checkbox" name="serv14" id="item4" value="14" class="hidden" autocomplete="off">
-              </label>
-            </div>
+              </div>';
+				}
+				 ?>            
             </center>
           </div>
           <br>
           <hr>
-            <input type="submit" value="Check item" class="btn btn-success form-control">
-				  <!-- servicios end -->
-				<!-- <input type="submit" value="Enviar" class="btn btn-success " onclick="validar()" > -->
+            <input type="submit" value="enviar" class="btn btn-success form-control">
 			</form>
 		</div>
 	</div>

@@ -16,7 +16,7 @@
 	    <div class="collapse" id="veterinaria">
 	      <a href="?controller=Administrador&accion=listaVet" class="list-group-item">Ver Lista</a>
 	      <a href="?controller=Administrador&accion=formularioVet" class="list-group-item">Crear Nuevo</a>
-	      <a href="?controller=Administrador&accion=index" class="list-group-item">Servicios</a>
+	      <a href="?controller=Administrador&accion=servicios" class="list-group-item">Servicios</a>
 	      <a href="?controller=Administrador&accion=mapa" class="list-group-item">Mapa</a>
 	    </div>
 	</div>

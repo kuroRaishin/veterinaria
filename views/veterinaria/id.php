@@ -1,8 +1,9 @@
 <?php 
-include_once 'views/veterinaria/menu.php';
+require_once 'views/login/mainmenu.php';
 error_reporting();
 if ($_SESSION['estado']!= 2) {
   header("location:index.php");
+}
  ?>
 
  <div class="row">

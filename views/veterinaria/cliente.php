@@ -1,5 +1,5 @@
 <?php 
-include_once 'views/veterinaria/menu.php';
+require_once 'views/login/mainmenu.php';
 error_reporting(0);
 
 if ($_SESSION['estado']!= 2) {
@@ -17,7 +17,7 @@ if($_REQUEST['documento']!=""){
 
 
  ?>
-<center><h1>Panel de Control</h1><h2>Veterinaria <?php echo $_SESSION['nombre']; ?></h2></center>
+<center><h1>Panel de Control</h1><h2>Veterinaria</h2></center>
  <div class="row">
  	<div class="col-md-3">
  		<?php include_once'views/veterinaria/menuVet.php'; ?>

@@ -1,4 +1,19 @@
+<?php 
 
+if (!isset($_SESSION['nombre'])) {
+  $sign='<li><a href="" class="button-sp"  data-toggle="modal" data-target="#modal" />iniciar sesión <span class="fa fa-sign-in"></span> </a></li>';
+}
+else{
+  $sign='<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" ><span class="fa fa-user-md"></span> '.$_SESSION['email'].' <span class="fa fa-chevron-down"></a>
+          <ul class="dropdown-menu">
+            <li><a href="?controller=login&accion=salir"><span class="fa fa-user-md"></span> Cerrar Sesión</a></li>
+          </ul>
+         </li>';
+}
+
+ ?>
+
+<!-- navbar -->
   <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
       <div class="navbar-header">
@@ -8,7 +23,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar brand" href="#"><img src="assets/image/logomin.png" alt="Pet-Line">
+        <a class="navbar brand" href="index.php"><img src="assets/image/logomin.png" alt="Pet-Line">
         </a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
@@ -20,7 +35,12 @@
     	</ul>
     	<ul class="nav navbar-nav navbar-right">
     		<br>
-			<li><a href="?controller=login&accion=salir" class="button-red"/><span class="glyphicon glyphicon-user"></span> Cerrar Sesion</a></li>
+			<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown" ><span class="fa fa-user-md"></span> <?php echo $_SESSION['email']; ?> <span class="fa fa-chevron-down"></a>
+          <ul class="dropdown-menu">
+            <li><a href="?controller=login&accion=salir"><span class="fa fa-config"></span> cuenta</a></li>
+            <li><a href="?controller=login&accion=salir"><span class="fa fa-log-out"></span> Cerrar Sesión</a></li>
+          </ul>
+         </li>
 		</ul>
       </div>
       <!--/.nav-collapse -->

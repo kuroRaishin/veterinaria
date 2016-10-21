@@ -1,7 +1,8 @@
 <?php 
-include_once 'views/veterinaria/menu.php';
+require_once 'views/login/mainmenu.php';
 if ($_SESSION['estado']!= 2) {
   header("location:index.php");
+}
  ?>
 <center><h1>Panel de Control</h1><h2>Veterinaria <?php echo $_SESSION['nombre']; ?></h2></center>
  <div class="row">

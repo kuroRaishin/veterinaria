@@ -26,7 +26,6 @@
 	<script type="text/javascript" src="assets/js/jquery.js"></script>
 	<script type="text/javascript" src="assets/js/jquery-ui.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
-	<script type="text/javascript" src="assets/js/banner.js"></script>
 	<script type="text/javascript" src="assets/js/star-rating.js"></script>
 
 	 <link href="assets/css/jplist.core.min.css" rel="stylesheet" type="text/css" />
@@ -61,10 +60,15 @@
                 ,itemPath: '.list-item'
                 ,panelPath: '.jplist-panel'
             });
+            $(".img-check").click(function(){
+                $(this).toggleClass("check");
+            });
             $('.carousel').carousel({
               interval: 6000
             });
             $( "#tabs" ).tabs();
+            $( "#datepicker" ).datepicker({ minDate: -0 });
+             $( "#datepicker" ).datepicker( "option", "showAnim", "clip" );
         });
     </script>
 </head>

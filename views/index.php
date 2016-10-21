@@ -14,12 +14,12 @@ require_once 'views/login/mainmenu.php';
             <!-- ios button: show/hide panel -->
             <div class="jplist-ios-button">
                 <i class="fa fa-sort"></i>
-                jPList Actions
+                opciones de busqueda
             </div>
 
             <!-- panel -->
             <div class="row">
-            <div class="jplist-panel box panel-top">
+            <div class="jplist-panel box panel-top col-md-offset-2">
 
                 <!-- back button button -->
                 <button
@@ -37,7 +37,7 @@ require_once 'views/login/mainmenu.php';
                         data-control-type="reset"
                         data-control-name="reset"
                         data-control-action="reset">
-                    <i class="fa fa-share">Reset</i> 
+                    <i class=""></i>limpiar 
                 </button>
 
                 <!-- items per page dropdown -->
@@ -79,7 +79,7 @@ require_once 'views/login/mainmenu.php';
                 <!-- filtrar por titulo -->
                 <div class="text-filter-box">
 
-                    <i class="fa fa-search  jplist-icon glyphicon glyphicon-search"></i>
+                    <i class="fa fa-search  jplist-icon"></i>
 
                     <!--[if lt IE 10]>
                     <div class="jplist-label">Filter by Title:</div>
@@ -99,17 +99,17 @@ require_once 'views/login/mainmenu.php';
                 <!-- filtro por descripcion -->
                 <div class="text-filter-box">
 
-                    <i class="fa fa-search  jplist-icon glyphicon glyphicon-search"></i>
+                    <i class="fa fa-search  jplist-icon"></i>
 
                     <!--[if lt IE 10]>
-                    <div class="jplist-label">Filter by Description:</div>
+                    <div class="jplist-label">filtrar por descripción:</div>
                     <![endif]-->
 
                     <input
                             data-path=".desc"
                             type="text"
                             value=""
-                            placeholder="por desc.."
+                            placeholder="por servicios"
                             data-control-type="textbox"
                             data-control-name="desc-filter"
                             data-control-action="filter"
@@ -122,7 +122,7 @@ require_once 'views/login/mainmenu.php';
                         <span
                                 data-control-type="button-filter"
                                 data-control-action="filter"
-                                data-control-name="architecture-btn"
+                                data-control-name="healt-btn"
                                 data-path=".salud">
                                 <i class="fa fa-caret-right"></i>
                                 Salud
@@ -132,7 +132,7 @@ require_once 'views/login/mainmenu.php';
                         <span
                                 data-control-type="button-filter"
                                 data-control-action="filter"
-                                data-control-name="christmas-btn"
+                                data-control-name="fashion-btn"
                                 data-path=".moda">
                                 <i class="fa fa-caret-right"></i>
                                 Moda
@@ -160,7 +160,27 @@ require_once 'views/login/mainmenu.php';
 
                     </ul>
                 </div>
+                <!-- services tags -->
+                <div class="jplist-group">
+                    <ul>
+                        <?php 
+                        foreach ($stmt2 as $key) {
+                            echo '<li>
+                        <span
+                                data-control-type="button-filter"
+                                data-control-action="filter"
+                                data-control-name="'.$key->nombre.'-btn"
+                                data-path=".'.$key->nombre.'">
+                                <i class="fa fa-caret-right"></i>
+                                '.$key->nombre.'
+                        </span>';
+                        }
 
+                         ?>
+
+
+                    </ul>
+                </div>
                 <!-- pagination results -->
                 <div
                         class="jplist-label"
@@ -209,12 +229,26 @@ require_once 'views/login/mainmenu.php';
                             <input type="hidden" class="hidden" name="documento" value="'.$key->documento.'">
                             </button>
                             </form>
-                            <p class="desc">'.substr($key->descripcion, 0, 200).'</p>
-                            <p class="like">'.$key->rating.' stars</p>
-                            <p><input id="input-21e" value="'.$key->rating.'" type="number" class="rating" readonly="true" min=0 max=5 step=0.5 data-size="xs" ></p>
-                            <p class="theme">
-                                <span class="'.$key->tags.'">'.ucwords($key->tags).'</span>
-                            </p>
+                            <p><b>Ubicación:</b> '.$key->direccion.'</p>
+                            <p class="desc"><b>Servicios: </b>';
+                            $array = $key->id_servicios;
+                            $array = explode(',', $array);
+
+                            for ($a=0; $a < sizeof($array); $a++) { 
+                              echo '<span class="'.ucwords($array[$a]).'">'.ucwords($array[$a]).'</span> ';
+                            }
+                            echo'</p>
+
+                            <h6 class="like">'.substr($key->rating, 0,3).' stars por '.$key->votantes.' usuarios</h6>
+                            <p><input id="input-21e" value="'.$key->rating.'" type="number" class="rating" readonly="true" min=0 max=5 step=0.1 data-size="xs" ></p>
+                            <p class="theme">';
+                            $tag = $key->tags;
+                            $tag = explode(',', $tag);
+                            for ($x=0; $x < sizeof($tag); $x++) { 
+                                echo '<span class="'.$tag[$x].'">'.ucwords($tag[$x]).'</span> ';
+                            }
+                                
+                            echo '</p>
                         </div>
                  </div>';
                 }
@@ -226,8 +260,8 @@ require_once 'views/login/mainmenu.php';
                 </div>
             </div>
 
-            <div class="box jplist-no-results text-shadow align-center">
-                <b>ho hay resultados que coincidan</b>
+            <div class="box jplist-no-results text-shadow text-center">
+                <b>ho hay resultados que coincidan</b><br>
             </div>
 
             <!-- ios button: show/hide panel -->
@@ -237,7 +271,7 @@ require_once 'views/login/mainmenu.php';
             </div>
 
             <!-- panel -->
-            <div class="jplist-panel box panel-bottom">
+            <div class="jplist-panel box panel-bottom col-md-offset-2">
 
                 <!-- items por página dropdown -->
                 <div

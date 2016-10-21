@@ -1,23 +1,27 @@
 <?php 
-error_reporting();
+error_reporting(0);
 session_start();
 require_once 'model/administrador.php';
 require_once 'model/propietario.php';
 require_once 'model/veterinaria.php';
+require_once 'model/sugerencia.php';
 require_once 'model/mascota.php';
 require_once 'model/usuario.php';
+require_once 'model/noticia.php';
 
 class AdministradorControlador{
 	
-	private $model,$owner,$vet,$pet,$user;
+	private $model,$owner,$vet,$pet,$user,$new,$sugg;
 	
 
 	public function __construct(){
 		$this->model=new Administrador();
 		$this->owner=new Propietario();
 		$this->vet=new Veterinaria();
+		$this->sugg=new Sugerencia();
 		$this->user=new Usuario();
 		$this->pet=new Mascota();
+		$this->new=new noticia();
 		
 	}
 
@@ -55,10 +59,86 @@ class AdministradorControlador{
 		require_once 'views/administrador/listaVet.php';
 		require_once 'views/footer.php';
 	}
+	public function solicitudes() {
+		$veterinarias = $this->vet;
+		$stmt= $veterinarias->pendientes();
+		require_once 'views/header.php';
+		require_once 'views/administrador/solicitudes.php';
+		require_once 'views/footer.php';
+	}
+	public function sugerencias() {
+		$sugerencias = $this->sugg;
+		$stmt= $sugerencias->listar();
+		require_once 'views/header.php';
+		require_once 'views/administrador/sugerencias.php';
+		require_once 'views/footer.php';
+	}
+	public function aceptarNoticias(){
+		$noticias = $this->new;
+		$estado="publicado";
+		$noticias->setFecha_caducidad($_REQUEST['caducidad']);
+		$noticias->setId($_REQUEST['id']);
+		$noticias->setEstado($estado);
+		$stmt=$noticias->aceptar();
+		if ($stmt==true) {
+			echo "<script type='text/javascript'>
+			alert('Activación exitosa');
+			window.history.back();
+			</script>";
+		}
+	}
+	public function rechazarNoticias(){
+		$noticias = $this->new;
+		$estado="rechazado";
+		$noticias->setId($_REQUEST['id']);
+		$noticias->setEstado($estado);
+		$stmt=$noticias->rechazar();
+		if ($stmt==true) {
+			echo "<script type='text/javascript'>
+			alert('Noticia rechazada exitosamente');
+			window.history.back();
+			</script>";
+		}else{
+			echo "<script type='text/javascript'>
+			alert('error');
+			window.history.back();
+			</script>";
+		}
+	}
+	public function noticias(){
+		$noticias = $this->new;
+		$stmt= $noticias->listar();
+		require_once 'views/header.php';
+		require_once 'views/administrador/noticias.php';
+		require_once 'views/footer.php';
+	}
+	public function activarVet() {
+		$veterinarias = $this->vet;
+		$veterinarias->setDocumento($_REQUEST['documento']);
+		$stmt = $veterinarias->activar($veterinarias);
+		if ($stmt==true) {
+			echo "<script type='text/javascript'>
+						alert('Activación exitosa');
+						window.location='?controller=administrador&accion=solicitudes';
+						</script>";
+		}else{
+			echo "<script type='text/javascript'>
+						alert('Ocurrio un error');
+						window.location='?controller=administrador&accion=solicitudes';
+						</script>";
+		}
+	}
 	public function mapa(){
 		
 		require_once 'views/header.php';
 		require_once 'views/administrador/mapa.php';
+		require_once 'views/footer.php';
+	}
+	public function servicios(){
+		$veterinarias = $this->vet;
+		$stmt= $veterinarias->listaServicios();
+		require_once 'views/header.php';
+		require_once 'views/administrador/servicios.php';
 		require_once 'views/footer.php';
 	}
 	public function formAdmin(){
@@ -78,11 +158,24 @@ class AdministradorControlador{
 	public function formularioVet(){
 		$veterinarias = $this->vet;
 		$stmt= $veterinarias->listarId($_REQUEST['documento']);
+		$stmt2= $veterinarias->listaServicios();
 		require_once 'views/header.php';
 		require_once 'views/administrador/formVet.php';
 		require_once 'views/footer.php';
 	}
-
+	public function new_service(){
+		$veterinarias = $this->vet;
+		$imagen=addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
+		$veterinarias->setNombre($_REQUEST['nombre']);
+		$veterinarias->setImagen($imagen);
+		$stmt= $veterinarias->nuevoServicio($veterinarias);
+		if ($stmt==true) {
+			echo "<script type='text/javascript'>
+						alert('servicio creado');
+						window.history.back();
+						</script>";
+		}
+	}
 	public function insertarAdmin(){
 		$administrador=$this->model;
 		$rol="administrador";	

@@ -11,7 +11,7 @@ include_once 'views/login/mainmenu.php';
   <div id="tabs">
     <ul>
       <li><a href="#info">Informacion Basica</a></li>
-      <li><a href="#citas">Agendar</a></li>
+      <!-- <li><a href="#citas">Agendar</a></li> -->
       <li><a href="#noticias">Noticias</a></li>
     </ul>
     <div id="info">
@@ -21,8 +21,9 @@ include_once 'views/login/mainmenu.php';
           <?php 
             echo '<img class="img-circle" width="200" height="200" src="data:image/jpg;base64,'.base64_encode($stmt['imagen']).'">';
            ?>
-           <form method="post" action="?controller=login&accion=puntuar">
-           <h5><input id="input-21e"  type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" value=<?php echo $stmt['rating']; ?> ></h5>
+           <form method="post" action="?controller=login&accion=puntuar" id="votacion">
+           <input type="hidden" name="veterinaria" class="hidden" value=<?php echo $stmt['documento'] ?>>
+           <h5><input id="input-21e" name="puntos" type="number" class="rating" min=0 max=5 step=1 data-size="xs" value=<?php echo $stmt['rating']; ?> ></h5>
            </center>
            <button class="ui-button ui-widget ui-corner-all btn-block">Enviar calificación</button>
            </form><hr>
@@ -73,9 +74,9 @@ include_once 'views/login/mainmenu.php';
         </div>
       </div>
     </div>
-    <div id="citas">
+    <!-- <div id="citas">
       <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
-    </div>
+    </div> -->
     <div id="noticias">
       <div class="row">
       <?php 

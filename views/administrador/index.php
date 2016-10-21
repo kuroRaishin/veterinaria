@@ -14,7 +14,7 @@ include_once 'views/administrador/menu.php';
 
 
 <div class="title">
-	<h1 class="text-center">PAGINA DE ADMINISTRADOR <?php echo$_SESSION['nombre']; ?> </h1>
+	<h1 class="text-center">PAGINA DE ADMINISTRADOR <?php echo$_SESSION['email']; ?> </h1>
 </div>
 
 

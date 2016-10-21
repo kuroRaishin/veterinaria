@@ -107,6 +107,12 @@ class Veterinaria extends Conexion
 	public function setRating($rating) {
 		$this->rating=$rating;
 	}
+	public function getVotantes() {
+		return $this->votantes;
+	}
+	public function setVotantes($votantes) {
+		$this->votantes=$votantes;
+	}
 	public function getPassword() {
 		return $this->password;
 	}
@@ -129,7 +135,7 @@ class Veterinaria extends Conexion
 
 		try {
 
-			$query="INSERT INTO veterinaria(nombre_empresa, documento, nombre, apellido, email, direccion, latVet, lonvet, telefono, fecha_creacion, id_servicios, imagen, rating, descripcion) VALUES ('".$this->nombre_empresa."','".$this->documento."','".$this->nombre."','".$this->apellido."','".$this->email."','".$this->direccion."','".$this->latVet."','".$this->lonvet."','".$this->telefono."','".$this->fecha_creacion."','".$this->id_servicios."','".$this->imagen."','".$this->rating."','".$this->descripcion."')";
+			$query="INSERT INTO veterinaria(nombre_empresa, documento, nombre, apellido, email, direccion, latVet, lonvet, telefono, fecha_creacion, id_servicios, imagen, rating, descripcion,tags) VALUES ('".$this->nombre_empresa."','".$this->documento."','".$this->nombre."','".$this->apellido."','".$this->email."','".$this->direccion."','".$this->latVet."','".$this->lonvet."','".$this->telefono."','".$this->fecha_creacion."','".$this->id_servicios."','".$this->imagen."','".$this->rating."','".$this->descripcion."','".$this->tags."')";
 
 			$stmt=$this->model->prepare($query);
 			$stmt->execute();
@@ -186,15 +192,40 @@ class Veterinaria extends Conexion
 		}		
 	}
 
+	public function calificar(){
+		try {
+			$query="UPDATE veterinaria SET rating='".$this->rating."', votantes='".$this->votantes."' WHERE documento='".$this->documento."'";
+			$stmt=$this->model->prepare($query);
+			$stmt->execute();
+			return true;
+		} catch (PDOException $e) {
+			die($e->getMessage());
+		}
+	}
 	public function listar() {
 
-		$query="SELECT * FROM veterinaria WHERE activo='1'";
+		$query="SELECT * FROM veterinaria WHERE activo=1";
 
 		$stmt=$this->model->prepare($query);
 		$stmt->execute();
 		return $stmt->fetchAll(PDO::FETCH_OBJ);
 	}
+	public function pendientes() {
 
+		$query="SELECT * FROM veterinaria WHERE activo=2";
+
+		$stmt=$this->model->prepare($query);
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_OBJ);
+	}
+	public function activar() {
+
+		$query="UPDATE veterinaria SET activo=1 WHERE documento='".$this->documento."'";
+
+		$stmt=$this->model->prepare($query);
+		$stmt->execute();
+		return true;
+	}
 	public function listarId(){
 		$query="SELECT * FROM veterinaria WHERE documento='".$this->documento."'";
 		$stmt=$this->model->prepare($query);
@@ -210,7 +241,16 @@ class Veterinaria extends Conexion
 		$stmt->execute();
 		return $stmt->fetchAll(PDO::FETCH_OBJ);
 	}
-
+	public function nuevoServicio(){
+		try {
+			$query="INSERT INTO servicios(nombre,imagen) VALUES ('".$this->nombre."','".$this->imagen."')";
+			$stmt=$this->model->prepare($query);
+			$stmt->execute();
+			return true;
+		} catch (PDOException $e) {
+			die($e->getMessage());
+		}
+	}
 	function getCoordenadas($address){
     $address = urlencode($address);
     $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=" . $address;

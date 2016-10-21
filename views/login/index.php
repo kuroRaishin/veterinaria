@@ -13,38 +13,9 @@
 |..|...\..\  \______/   |.|......\..\ \_________/
  -->
 
-<!-- navbar responsive start-->
-
-  <nav class="navbar navbar-inverse navbar-static-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar brand" href="#"><img src="assets/image/logomin.png" alt="Pet-Line">
-        </a>
-      </div>
-      <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-	      <li><a href="#servicios"><input type="button" class="button-yllw" value="servicios" /></a></li>
-	      <li><a href="#"><input type="button" class="button-blue" value="flores" /></a></li>
-	      <li><a href="#"><input type="button" class="button-green" value="opcion3" /></a></li>
-	      <li><a href="#"><input type="button" class="button-violet" value="opcion4" /></a></li>
-    	</ul>
-    	<ul class="nav navbar-nav navbar-right">
-    		<br>
-			<li><a href="" class="button-sp"  data-toggle="modal" data-target="#modal" /><span class="glyphicon glyphicon-user"></span> iniciar sesión</a></li>
-		</ul>
-      </div>
-      <!--/.nav-collapse -->
-    </div>
-    <!--/.container-fluid -->
-  </nav>
-
-<!-- navbar responsive end -->
+<?php 
+include_once 'views/login/mainmenu.php';
+ ?>
 <!-- slider -->
 <div class="row">
 <div class="carousel slide" id="slide" data-ride="carousel">
@@ -55,14 +26,26 @@
 	</ol>	
 
 	<div class="carousel-inner" role="listbox">
-		<div class="item active">
+		<div class="item">
 			<img src="assets/image/main1.jpg" />
+			<div class="carousel-caption" id="info1"><br><br><span class="fa fa-heart"></span>
+				<h2><span class="fa fa-star"></span>Busca la mejor opción <span class="fa fa-star"></span><br><span class="fa fa-star"></span>para el cuidado de tu mascota. <span class="fa fa-star"></span></h2>
+			</div>
 		</div>		
 		<div class="item">
-			<img src="assets/image/main2.jpg" />
+			<img src="assets/image/main2.jpg" /><br><br>
+			<div class="carousel-caption" id="info2">
+				<h2>tu mascota ideal <br>En la veterinaria ideal <br><span >PET-LINE</span></h2>
+			</div>
 		</div>	
-		<div class="item">
-			<img src="assets/image/main3.jpg" />
+		<div class="item active">
+			<img src="assets/image/main3.jpg" /><br><br>
+			<div class="carousel-caption" id="info3">
+				PET-LINE <br>
+				<h2>Publica tú veterinaria, <br>date a conocer, <br>y haz parte de esta gran comunidad</h2>
+				<br>
+				<a href="?controller=login&accion=opcion" class="carousel-caption-btn button" ><h3> Haz Parte </h3></a>
+			</div>
 		</div>	
 		
 	</div>
@@ -72,49 +55,7 @@
 
 </div>
 <!--  carousel end-->
-<!-- modal login -->
-<div id="modal" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-
-	<div class="modal-content">
-		<div class="modal-body">
-	
-			<div class="panel panel-success ">
-			<div class="panel-heading"><h1 class="text-center">Iniciar Sesión</h1></div>
-			<div class="panel-body">
-			<form method="post" action="?controller=login&accion=logeo" id="logeo">
-				
-				<div class="form-group">
-					<label for="email">correo</label>
-					<input type="text" name="email" class="form-control" title="correo "  required="required">
-				</div>
-				<div class="form-group">
-					<label for="password">pasword</label>
-					<input type="password" name="password" class="form-control" required="required">
-				</div>
-				
-				<div class="form-group">
-					<button type="submit" class="btn btn-success">INGRESAR</button>
-				</div>
-				
-				
-
-			</form>	
-			<hr>
-				<b>no esta registrado? </b><a href="?controller=login&accion=opcion"><button class="btn btn-info"> Registrar</button></a>
-			</div>
-			</div>
-	
-
-
-		</div>
-	<div class="modal-footer">
-		<button class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-	</div>
-	</div>	
-	</div>
-</div>
-<!-- modal login end -->
+<!--  -->
 <div class="section">
 	<div class="title">
 		<h1>BUSQUEDAS</h1>
@@ -129,20 +70,26 @@
 					<h2 class="center">Buscar</h2>
 				</div>
 				<article class="text-justify">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					<br>
+					<br>
+					¿y cual es la <br>mejor opción?
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					
 				</article>
-				<center><a href="?controller=login&accion=busquedas"><button class="btn btn-primary">Iniciar Busqueda</button></a></center>
+				
 			</div>
 		</div>
 		<div class="col-md-6 col-xs-12">
-			<div id="mapa">
-		        <h2>Aqui irá el mapa!</h2>
-		    </div>
+			<div id="info4">
+				<h3>PET-LINE cuenta con un listado en el cual podras filtrar las veterinarias dependiendo del tipo de necesidad, tambien puedes usar los Tags de busqueda para separar la busqueda por tendencias <br>ingresa y descubre un mundo de opciones para ti y tu mascota.</h3><br><br>
+				<center><a href="?controller=login&accion=busquedas"><button class="button"> <h2>Iniciar Busqueda</h2></button></a></center>
+			</div>
 		</div>
 	</div>
 </div>
@@ -216,104 +163,14 @@
 		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 		cillum dolore eu fugiat nulla pariatur. </p>
 	</div>
-	<div class="col-md-6 primary-section"><img src="assets/image/bg5.jpg"></div>
+	<div class="col-md-6 primary-section">
+		<div class="img-responsive">
+			<img src="assets/image/cute.jpg" width="580" height="440">
+			<div class="carousel-caption" id="info5">
+				<h2>Da un hogar a quien te dara su eterno amor</h2>
+			</div>
+		</div>
+	</div>
 </div>
 <div class="clearfix"></div>	
 </div>
-
-<!--  -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL_7-6zzI4qzB8qqjdiC8vgC9pEYefDSM"></script>
-<script>
-    //VARIABLES GENERALES
-		//declaras fuera del ready de jquery
-    
-    var marcadores_bd= [];
-    var mapa = null; //VARIABLE GENERAL PARA EL MAPA
-    //FUNCION PARA QUITAR MARCADORES DE MAPA
-    function limpiar_marcadores(lista)
-    {
-        for(i in lista)
-        {
-            //QUITAR MARCADOR DEL MAPA
-            lista[i].setMap(null);
-        }
-    }
-	//ready de jquery
-    $(document).on("ready", function(){		
-		var divMapa = document.getElementById('mapa');
-		
-        
-        var punto = new google.maps.LatLng(4.670522,-74.09816);
-        var config = {
-            zoom:12,
-            center:punto,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-		
-		//VARIABLE MAPA
-        mapa = new google.maps.Map( divMapa, config );       
-        
-        //CARGAR PUNTOS AL TERMINAR DE CARGAR LA PAGINA
-        listar();//PUNTOS EN EL MAPA DE LAS VETERINARIAS
-    });
-	
-	
-    //FUERA DE READY DE JQUERY
-    //FUNCTION PARA RECUPERAR PUNTOS DE LA BD
-    function listar()
-    {
-        //ANTES DE LISTAR MARCADORES
-        //SE DEBEN QUITAR LOS ANTERIORES DEL MAPA
-       limpiar_marcadores(marcadores_bd);
-       
-       $.ajax({
-               type:"POST",
-               url:"vetajax.php",
-               dataType:"JSON",
-               data:"&tipo=listar",
-               success:function(data){
-                   if(data.estado=="ok")
-                    {
-                        //alert("Hay puntos en la BD");
-                        $.each(data.mensaje, function(i, item){
-                            //OBTENER LAS COORDENADAS DEL PUNTO
-                            var posi = new google.maps.LatLng(item.latVet, item.lonVet);//bien
-                            //CARGAR LAS PROPIEDADES AL MARCADOR
-                            var marca = new google.maps.Marker({
-                                idMarcador:item.idVeterinaria,
-                                position:posi,
-                                title: item.nombreEmpresa,
-                                cx:item.latVet,//esas coordenadas vienen de la BD
-                                cy:item.lonVet//esas coordenadas vienen de la BD
-                            });
-                            //AGREGAR EVENTO CLICK AL MARCADOR
-                            //MARCADORES QUE VIENEN DE LA BASE DE DATOS
-                            google.maps.event.addListener(marca, "click", function(){
-                               //ENTRAR EN EL SEGUNDO COLAPSIBLE
-                               //Y OCULTAR EL PRIMERO
-                               $("#collapseTwo").collapse("show");
-                               $("#collapseOne").collapse("hide");                               
-                               
-                            });
-                            //AGREGAR EL MARCADOR A LA VARIABLE MARCADORES_BD
-                            marcadores_bd.push(marca);
-                            //UBICAR EL MARCADOR EN EL MAPA
-                            marca.setMap(mapa);
-                        });
-                    }
-                else
-                    {
-                        alert("NO hay puntos en la BD");
-                    }
-               },
-               beforeSend:function(){
-                   
-               },
-               complete:function(){
-                   
-               }
-           });
-    }
-    //PLANTILLA AJAX
-    
-</script>

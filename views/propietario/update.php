@@ -1,5 +1,5 @@
 <?php 
-include_once 'views/propietario/menu.php';
+require_once 'views/login/mainmenu.php';
 if ($_SESSION['estado']!= 3) {
   header("location:index.php");
 }

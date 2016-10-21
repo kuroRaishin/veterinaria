@@ -3,6 +3,7 @@
 * 
 */
 session_start();
+error_reporting(0);
 require_once'model/usuario.php';
 require_once'model/mascota.php';
 require_once 'model/propietario.php';
@@ -21,6 +22,9 @@ class VeterinariaControlador
 	}
 
 	public function index(){
+		$veterinaria= $this->vet;
+		$veterinaria->setDocumento($_SESSION['nombre']);
+		$stmt=$veterinaria->listarId($veterinaria);
 		require_once 'views/header.php';
 		require_once 'views/veterinaria/index.php';
 		require_once 'views/footer.php';
@@ -28,7 +32,7 @@ class VeterinariaControlador
 	public function allNews(){
 		$noticia = $this->new;
 		$noticia->setCreador($_SESSION['nombre']);
-		$stmt= $noticia->listaRel();
+		$stmt= $noticia->listaRel($noticia);
 		require_once 'views/header.php';
 		require_once 'views/veterinaria/allNews.php';
 		require_once 'views/footer.php';

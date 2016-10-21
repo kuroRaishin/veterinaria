@@ -4,10 +4,16 @@
 */
 class Noticia extends Conexion
 {
-	private $model,$titulo,$imagen,$descripcion,$creador,$activo,$fecha_creacion;
+	private $model,$id,$titulo,$imagen,$descripcion,$creador,$estado,$fecha_creacion,$fecha_caducidad;
 	function __construct()
 	{
 		$this->model = parent::__construct();
+	}
+	public function getId() {
+		return $this->id;
+	}
+	public function setId($id) {
+		$this->id=$id;
 	}
 	public function getTitulo() {
 		return $this->titulo;
@@ -33,17 +39,23 @@ class Noticia extends Conexion
 	public function setCreador($creador) {
 		$this->creador=$creador;
 	}
-	public function getActivo() {
-		return $this->nombre;
+	public function getEstado() {
+		return $this->estado;
 	}
-	public function setActivo($activo) {
-		$this->activo=$activo;
+	public function setEstado($estado) {
+		$this->estado=$estado;
 	}
 	public function getFecha_creacion() {
 		return $this->fecha_creacion;
 	}
 	public function setFecha_creacion($fecha_creacion) {
 		$this->fecha_creacion=$fecha_creacion;
+	}
+	public function getFecha_caducidad() {
+		return $this->fecha_caducidad;
+	}
+	public function setFecha_caducidad($fecha_caducidad) {
+		$this->fecha_caducidad=$fecha_caducidad;
 	}
 
 	public function insertar(){
@@ -60,7 +72,7 @@ class Noticia extends Conexion
 			
 		}
 	}
-	public function actualizar(){
+	public function actualizar(){//incompleta
 		try {
 
 			$query="UPDATE noticias SET titulo='".$this->titulo."', imagen='".$this->imagen."', descripcion='".$this->descripcion."', creador='".$this->creador."'";
@@ -74,6 +86,60 @@ class Noticia extends Conexion
 			return false;
 			
 		}	
+	}
+	public function aceptar(){
+		try {
+
+			$query="UPDATE noticias SET fecha_caducidad='".$this->fecha_caducidad."', estado='".$this->estado."' WHERE id_noticia='".$this->id."'";
+			$stmt=$this->model->prepare($query);
+			$stmt->execute();
+
+			return true;
+			
+		} catch (PDOException $e) {
+
+			die($e->getMessage());
+			
+		}	
+	}
+	public function rechazar(){
+		try {
+
+			$query="UPDATE noticias SET  estado='".$this->estado."' WHERE id_noticia='".$this->id."'";
+			$stmt=$this->model->prepare($query);
+			$stmt->execute();
+
+			return true;
+			
+		} catch (PDOException $e) {
+
+			die($e->getMessage());
+			
+		}	
+	}
+	public function fechaLimite(){
+		$consulta = new Noticia();
+		$stmt=$consulta->Listar();
+		$hoy=date("Y-m-d");
+		foreach ($stmt as $key) {
+		$date1= new DateTime($key->fecha_caducidad);
+		$date2= new DateTime($hoy);
+		$interval = $date1->diff($date2);
+		$tiempo=$interval->format('%R%a');
+		if ($tiempo>0) {
+			$estado="caducado";
+			$query="UPDATE noticias SET estado='".$estado."' WHERE id_noticia='".$key->id_noticia."'";
+			$stmt=$this->model->prepare($query);
+			$stmt->execute();
+		}
+		
+		}
+	
+	
+		$query2="SELECT * FROM noticias WHERE estado='publicado'  ORDER BY fecha_creacion DESC" ;
+		$stmt=$this->model->prepare($query2);
+		$stmt->execute();
+		return $stmt ->fetchAll(PDO::FETCH_OBJ);
 	}
 	public function eliminar(){
 		try {

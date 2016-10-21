@@ -8,7 +8,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar brand" href="#"><img src="assets/image/logomin.png" alt="Pet-Line">
+        <a class="navbar brand" href="index.php"><img src="assets/image/logomin.png" alt="Pet-Line">
         </a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
@@ -20,7 +20,8 @@
     	</ul>
     	<ul class="nav navbar-nav navbar-right">
     		<br>
-			<li><a href="?controller=login&accion=salir" class="button-red"/><span class="glyphicon glyphicon-user"></span> Cerrar Sesion</a></li>
+        <li><a href="?controller=login&accion=salir" class="button-red"/><span class="glyphicon glyphicon-user"></span> Cuenta</a></li>
+			   <li><a href="?controller=login&accion=salir" class="button-red"/><span class="glyphicon glyphicon-user"></span> Cerrar Sesion</a></li>
 		</ul>
       </div>
       <!--/.nav-collapse -->
